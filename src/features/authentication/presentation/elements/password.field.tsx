@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import { ControllerRenderProps } from 'react-hook-form';
+import { ReactNode, useState } from 'react';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import { RiEyeLine, RiEyeOffLine, RiLockLine } from 'react-icons/ri';
 import { FormControl } from '@/lib/ui/elements/form';
 import { Input } from '@/lib/ui/elements/input';
 
-export const PasswordField = <T,>({ field }: { field: ControllerRenderProps<T> }) => {
+export const PasswordField = <TFieldValues extends FieldValues>({
+  field
+}: {
+  field: ControllerRenderProps<TFieldValues>;
+}): ReactNode => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

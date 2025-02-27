@@ -1,9 +1,14 @@
-import { ControllerRenderProps } from 'react-hook-form';
+import { ReactNode } from 'react';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import { RiMailLine } from 'react-icons/ri';
 import { FormControl } from '@/lib/ui/elements/form';
 import { Input } from '@/lib/ui/elements/input';
 
-export const EmailField = <T,>({ field }: { field: ControllerRenderProps<T> }) => (
+export const EmailField = <TFieldValues extends FieldValues>({
+  field
+}: {
+  field: ControllerRenderProps<TFieldValues>;
+}): ReactNode => (
   <div className='relative'>
     <FormControl>
       <Input className='p-6 pl-11 text-lg' type='text' {...field} />

@@ -1,20 +1,16 @@
 'use client';
 
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
+import { forgotPasswordSchema, ForgotPasswordSchema } from '../../domain';
 import { EmailField } from '../elements';
 
-const forgotPasswordValidation = z.object({
-  username: z.string().min(1, { message: 'Saisissez votre adresse électronique ou numéro de téléphone portable' })
-});
-
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
-  const form = useForm<z.infer<typeof forgotPasswordValidation>>({
-    resolver: zodResolver(forgotPasswordValidation),
+  const form = useForm<ForgotPasswordSchema>({
+    resolver: effectTsResolver(forgotPasswordSchema),
     defaultValues: {
       username
     }
@@ -22,7 +18,7 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
 
   const usernameWatcher = form.watch('username');
 
-  const onSubmit = (values: z.infer<typeof forgotPasswordValidation>) => {
+  const onSubmit = (values: ForgotPasswordSchema) => {
     console.log(values);
   };
 

@@ -1,41 +1,17 @@
 'use client';
 
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
+import { RegisterSchema, registerSchema } from '../../domain';
 import { EmailField, PasswordField } from '../elements';
 
-const registerValidation = z.object({
-  username: z
-    .string()
-    .min(1, { message: 'Saisissez votre adresse électronique ou numéro de téléphone portable' })
-    .transform((value) => value.replace(/\s+/g, ''))
-    .refine(
-      (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || /^(?:0[1-9]\d{8}|\+33[1-9]\d{8})$/.test(value),
-      (value) => ({ message: `"${value}" n'est pas une adresse électronique ou un numéro de téléphone valide` })
-    ),
-  password: z
-    .string()
-    .min(1, { message: 'Saisissez le mot de passe de votre compte' })
-    .min(8, { message: 'Le mot de passe doit contenir 8 caractères au minimum' })
-    .regex(/[{}()\[\]<>.:;!?=*+\-_'"/@#%&]/, {
-      message: 'Le mot de passe doit contenir au moins un caractère spécial : []{}()<>.:;!?=*+-_\'"/@#%&'
-    })
-    .regex(/\d/, { message: 'Le mot de passe doit contenir au moins un chiffre' })
-    .regex(/[A-Z]/, { message: 'Le mot de passe doit contenir au moins une lettre en majuscule' })
-    .regex(/[a-z]/, { message: 'Le mot de passe doit contenir au moins une lettre en minuscule' })
-    .refine((password) => !password.startsWith(' '), { message: 'Le mot de passe ne doit pas commencer avec un espace' })
-    .refine((password) => !password.endsWith(' '), { message: 'Le mot de passe ne doit pas se terminer avec un espace' }),
-  terms: z.boolean().refine((isAccepted) => isAccepted, { message: 'Vous devez accepter les conditions d’utilisation' })
-});
-
 export const RegisterForm = ({ username }: { username: string }) => {
-  const form = useForm<z.infer<typeof registerValidation>>({
-    resolver: zodResolver(registerValidation),
+  const form = useForm<RegisterSchema>({
+    resolver: effectTsResolver(registerSchema),
     defaultValues: {
       username,
       password: '',
@@ -45,7 +21,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
 
   const usernameWatch = form.watch('username');
 
-  const onSubmit = (values: z.infer<typeof registerValidation>) => {
+  const onSubmit = (values: RegisterSchema) => {
     console.log(values);
   };
 
