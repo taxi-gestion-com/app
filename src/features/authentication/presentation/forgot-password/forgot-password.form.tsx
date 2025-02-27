@@ -4,9 +4,9 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
-import { Input } from '@/lib/ui/elements/input';
+import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
+import { EmailField } from '../elements';
 
 const forgotPasswordValidation = z.object({
   username: z.string().min(1, { message: 'Saisissez votre adresse électronique ou numéro de téléphone portable' })
@@ -35,9 +35,7 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <FormControl>
-                <Input className='p-6 text-lg' type='text' {...field} />
-              </FormControl>
+              <EmailField field={field} />
               <FormMessage />
             </FormItem>
           )}

@@ -5,9 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
-import { Input } from '@/lib/ui/elements/input';
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
+import { EmailField, PasswordField } from '../elements';
 
 const registerValidation = z.object({
   username: z
@@ -58,9 +58,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <FormControl>
-                <Input className='p-6 text-lg' type='text' {...field} />
-              </FormControl>
+              <EmailField field={field} />
               <FormMessage />
             </FormItem>
           )}
@@ -71,9 +69,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Mot de passe</FormLabel>
-              <FormControl>
-                <Input className='p-6 text-lg' type='password' {...field} />
-              </FormControl>
+              <PasswordField field={field} />
               <FormDescription>Doit contenir minuscule, majuscule, chiffre et caractère spécial</FormDescription>
               <FormMessage />
             </FormItem>
