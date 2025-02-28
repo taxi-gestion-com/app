@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
+import { ResetPasswordPage } from '@/features/authentication';
 import { appPageTitle } from '@/features/web';
-import { ResetPasswordPage } from '@/features/authentication/presentation';
 
 export const metadata: Metadata = {
   title: appPageTitle('Réinitialiser le mot de passe')

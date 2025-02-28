@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import { Link } from '@/lib/ui/elements/link';
 import { City, Logo } from '../illustrations';
 
-export const HomePage = () => (
+export const HomePage = (): ReactNode => (
   <main className='h-screen'>
     <City className='flex h-full items-center justify-center'>
       <div className='relative p-12 text-center'>

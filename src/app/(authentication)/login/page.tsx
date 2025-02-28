@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
+import { LoginPage } from '@/features/authentication';
 import { appPageTitle } from '@/features/web';
-import { LoginPage } from '@/features/authentication/presentation';
 
 export const metadata: Metadata = {
   title: appPageTitle('Connexion')

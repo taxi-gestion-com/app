@@ -1,7 +1,7 @@
-import { Metadata } from 'next';
-import { appPageTitle } from '@/features/web';
-import { ForgotPasswordPage } from '@/features/authentication/presentation';
 import { ReactNode } from 'react';
+import { Metadata } from 'next';
+import { ForgotPasswordPage } from '@/features/authentication';
+import { appPageTitle } from '@/features/web';
 
 export const metadata: Metadata = {
   title: appPageTitle('Mot de passe oublié')

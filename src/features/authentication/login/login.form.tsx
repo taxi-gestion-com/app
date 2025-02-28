@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
-import { LoginSchema, loginSchema } from '../../domain';
-import { EmailField, PasswordField } from '../elements';
+import { EmailField, PasswordField } from '../_presentation';
+import { LoginSchema, loginSchema } from './login.schema';
 
 export const LoginForm = ({ username }: { username: string }) => {
   const form = useForm<LoginSchema>({
@@ -17,7 +17,7 @@ export const LoginForm = ({ username }: { username: string }) => {
     }
   });
 
-  const usernameWatcher = form.watch('username');
+  const usernameValue = form.watch('username');
 
   const onSubmit = (values: LoginSchema) => {
     console.log(values);
@@ -49,7 +49,11 @@ export const LoginForm = ({ username }: { username: string }) => {
           )}
         />
         <div className='text-end'>
-          <Link href={{ pathname: '/forgot-password', query: usernameWatcher.length > 0 ? { username: usernameWatcher } : {} }}>
+          <Link
+            href={{
+              pathname: '/forgot-password',
+              query: usernameValue.length > 0 ? { username: usernameValue } : {}
+            }}>
             Mot de passe oublié ?
           </Link>
         </div>
@@ -58,7 +62,11 @@ export const LoginForm = ({ username }: { username: string }) => {
         </Button>
       </form>
       <p className='mt-12 text-center'>
-        <Link href={{ pathname: '/register', query: usernameWatcher.length > 0 ? { username: usernameWatcher } : {} }}>
+        <Link
+          href={{
+            pathname: '/register',
+            query: usernameValue.length > 0 ? { username: usernameValue } : {}
+          }}>
           Créez le dès à présent&nbsp;!
         </Link>
       </p>

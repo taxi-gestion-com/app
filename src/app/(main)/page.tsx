@@ -1,3 +1,3 @@
-import { HomePage } from '@/features/brand/presentation';
+import { HomePage } from '@/features/brand';
 
 export default HomePage;

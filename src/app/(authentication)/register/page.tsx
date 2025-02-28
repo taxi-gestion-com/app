@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
+import { RegisterPage } from '@/features/authentication';
 import { appPageTitle } from '@/features/web';
-import { RegisterPage } from '@/features/authentication/presentation';
 
 export const metadata: Metadata = {
   title: appPageTitle('Créez votre compte')

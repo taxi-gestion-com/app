@@ -1,4 +1,6 @@
-export const Logo = ({ color, className }: { color?: string; className?: string }) => (
+import { ReactNode } from 'react';
+
+export const Logo = ({ color, className }: { color?: string; className?: string }): ReactNode => (
   <div className={className}>
     <svg
       width='100%'

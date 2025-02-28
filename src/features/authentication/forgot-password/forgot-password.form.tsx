@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
-import { forgotPasswordSchema, ForgotPasswordSchema } from '../../domain';
-import { EmailField } from '../elements';
+import { EmailField } from '../_presentation';
+import { forgotPasswordSchema, ForgotPasswordSchema } from './forgot-password.schema';
 
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
   const form = useForm<ForgotPasswordSchema>({
@@ -16,9 +16,9 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
     }
   });
 
-  const usernameWatcher = form.watch('username');
+  const usernameValue = form.watch('username');
 
-  const onSubmit = (values: ForgotPasswordSchema) => {
+  const onSubmit = (values: ForgotPasswordSchema): void => {
     console.log(values);
   };
 
@@ -41,7 +41,11 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
         </Button>
       </form>
       <p className='mt-12 text-center'>
-        <Link href={{ pathname: '/login', query: usernameWatcher.length > 0 ? { username: usernameWatcher } : {} }}>
+        <Link
+          href={{
+            pathname: '/login',
+            query: usernameValue.length > 0 ? { username: usernameValue } : {}
+          }}>
           Retour au formulaire de connexion
         </Link>
       </p>

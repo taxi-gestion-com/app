@@ -6,8 +6,8 @@ import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
-import { RegisterSchema, registerSchema } from '../../domain';
-import { EmailField, PasswordField } from '../elements';
+import { EmailField, PasswordField } from '../_presentation';
+import { RegisterSchema, registerSchema } from './register.schema';
 
 export const RegisterForm = ({ username }: { username: string }) => {
   const form = useForm<RegisterSchema>({
@@ -19,7 +19,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
     }
   });
 
-  const usernameWatch = form.watch('username');
+  const usernameValue = form.watch('username');
 
   const onSubmit = (values: RegisterSchema) => {
     console.log(values);
@@ -74,7 +74,11 @@ export const RegisterForm = ({ username }: { username: string }) => {
       </form>
       <p className='mt-12 text-center'>
         Vous avez déjà un compte&nbsp;?&ensp;
-        <Link href={{ pathname: '/login', query: usernameWatch.length > 0 ? { username: usernameWatch } : {} }}>
+        <Link
+          href={{
+            pathname: '/login',
+            query: usernameValue.length > 0 ? { username: usernameValue } : {}
+          }}>
           Connectez-vous
         </Link>
       </p>

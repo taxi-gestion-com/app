@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { RiCopyrightLine } from 'react-icons/ri';
-import { Logo } from '@/features/brand/presentation';
+import { Logo } from '@/features/brand';
 import { ThemeChanger } from '@/lib/ui/elements/theme-changer';
 import { Link } from '@/lib/ui/elements/link';
 
