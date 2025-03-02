@@ -1,16 +1,21 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
+import { useTRPC } from '@/trpc/client';
 import { EmailField } from '../_presentation';
-import { forgotPasswordSchema, ForgotPasswordSchema } from './forgot-password.schema';
+import { forgotPasswordValidation, ForgotPasswordValidation } from './forgot-password.validation';
 
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
-  const form = useForm<ForgotPasswordSchema>({
-    resolver: effectTsResolver(forgotPasswordSchema),
+  const trpc = useTRPC();
+  const forgotPassword = useMutation(trpc.forgotPassword.mutationOptions());
+
+  const form = useForm<ForgotPasswordValidation>({
+    resolver: effectTsResolver(forgotPasswordValidation),
     defaultValues: {
       username
     }
@@ -18,8 +23,8 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
 
   const usernameValue = form.watch('username');
 
-  const onSubmit = (values: ForgotPasswordSchema): void => {
-    console.log(values);
+  const onSubmit = (values: ForgotPasswordValidation): void => {
+    forgotPassword.mutate(values);
   };
 
   return (

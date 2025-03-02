@@ -1,17 +1,22 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
+import { useTRPC } from '@/trpc/client';
 import { EmailField, PasswordField } from '../_presentation';
-import { RegisterSchema, registerSchema } from './register.schema';
+import { RegisterValidation, registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
-  const form = useForm<RegisterSchema>({
-    resolver: effectTsResolver(registerSchema),
+  const trpc = useTRPC();
+  const register = useMutation(trpc.register.mutationOptions());
+
+  const form = useForm<RegisterValidation>({
+    resolver: effectTsResolver(registerValidation),
     defaultValues: {
       username,
       password: '',
@@ -21,8 +26,8 @@ export const RegisterForm = ({ username }: { username: string }) => {
 
   const usernameValue = form.watch('username');
 
-  const onSubmit = (values: RegisterSchema) => {
-    console.log(values);
+  const onSubmit = (values: RegisterValidation) => {
+    register.mutate(values);
   };
 
   return (

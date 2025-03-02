@@ -1,16 +1,21 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
+import { useTRPC } from '@/trpc/client';
 import { EmailField, PasswordField } from '../_presentation';
-import { LoginSchema, loginSchema } from './login.schema';
+import { LoginValidation, loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
-  const form = useForm<LoginSchema>({
-    resolver: effectTsResolver(loginSchema),
+  const trpc = useTRPC();
+  const login = useMutation(trpc.login.mutationOptions());
+
+  const form = useForm<LoginValidation>({
+    resolver: effectTsResolver(loginValidation),
     defaultValues: {
       username,
       password: ''
@@ -19,8 +24,8 @@ export const LoginForm = ({ username }: { username: string }) => {
 
   const usernameValue = form.watch('username');
 
-  const onSubmit = (values: LoginSchema) => {
-    console.log(values);
+  const onSubmit = (values: LoginValidation) => {
+    login.mutate(values);
   };
 
   return (

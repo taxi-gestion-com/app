@@ -1,6 +1,6 @@
 import { Schema } from 'effect';
 
-export const registerSchema = Schema.Struct({
+export const registerValidation = Schema.Struct({
   username: Schema.Trim.pipe(
     Schema.minLength(1, {
       message: () => 'Saisissez votre adresse électronique ou numéro de téléphone portable'
@@ -37,4 +37,4 @@ export const registerSchema = Schema.Struct({
   terms: Schema.Boolean.pipe(Schema.filter((isAccepted) => isAccepted || 'Vous devez accepter les conditions d’utilisation'))
 });
 
-export type RegisterSchema = typeof registerSchema.Type;
+export type RegisterValidation = typeof registerValidation.Type;
