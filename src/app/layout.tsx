@@ -29,7 +29,7 @@ const RootLayout = ({
   children: ReactNode;
 }>) => (
   <html lang='en' suppressHydrationWarning>
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <body className={`${geistSans.variable} ${geistMono.variable} bg-body text-foreground antialiased`}>
       <TrpcProvider>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           {children}

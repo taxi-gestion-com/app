@@ -7,6 +7,7 @@ import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
+import { Loading } from '@/lib/ui/elements/loading';
 import { useTRPC } from '@/trpc/client';
 import { EmailField, PasswordField } from '../_presentation';
 import { RegisterValidation, registerValidation } from './register.validation';
@@ -35,6 +36,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
+          disabled={register.isPending}
           name='username'
           render={({ field }) => (
             <FormItem className='mb-4'>
@@ -46,6 +48,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
         />
         <FormField
           control={form.control}
+          disabled={register.isPending}
           name='password'
           render={({ field }) => (
             <FormItem className='mb-4'>
@@ -57,13 +60,12 @@ export const RegisterForm = ({ username }: { username: string }) => {
           )}
         />
         <FormField
-          control={form.control}
           name='terms'
           render={({ field }) => (
             <FormItem className='mb-4'>
               <div className='flex items-center space-x-2'>
                 <FormControl>
-                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  <Checkbox checked={field.value} disabled={register.isPending} onCheckedChange={field.onChange} />
                 </FormControl>
                 <FormLabel>
                   J’accepte les <Link href='/terms'>conditions d’utilisation</Link>
@@ -73,8 +75,8 @@ export const RegisterForm = ({ username }: { username: string }) => {
             </FormItem>
           )}
         />
-        <Button className='mt-12 w-full p-6 text-lg' type='submit'>
-          Créer mon compte
+        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={register.isPending}>
+          <Loading isLoading={register.isPending}>Créer mon compte</Loading>
         </Button>
       </form>
       <p className='mt-12 text-center'>

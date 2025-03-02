@@ -1,8 +1,9 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:is(.dark *));
-
 @plugin 'tailwindcss-animate';
+@plugin "daisyui";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --body: hsl(0 0% 100%);
@@ -102,10 +103,4 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-}
-
-@layer base {
-  body {
-    @apply bg-body text-foreground;
-  }
 }
