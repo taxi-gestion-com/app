@@ -13,7 +13,7 @@ import { RegisterValidation, registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
   const trpc = useTRPC();
-  const register = useMutation(trpc.register.mutationOptions());
+  const register = useMutation(trpc.authentication.register.mutationOptions());
 
   const form = useForm<RegisterValidation>({
     resolver: effectTsResolver(registerValidation),

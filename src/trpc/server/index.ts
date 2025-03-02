@@ -1,8 +1,8 @@
-import { authenticationProcedures } from '@/features/authentication';
+import { authenticationRouter } from '@/features/authentication/_trpc';
 import { router } from './root';
 
 export const appRouter = router({
-  ...authenticationProcedures
+  authentication: authenticationRouter
 });
 
 export type AppRouter = typeof appRouter;

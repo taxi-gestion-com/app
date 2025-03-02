@@ -12,7 +12,7 @@ import { forgotPasswordValidation, ForgotPasswordValidation } from './forgot-pas
 
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
   const trpc = useTRPC();
-  const forgotPassword = useMutation(trpc.forgotPassword.mutationOptions());
+  const forgotPassword = useMutation(trpc.authentication.forgotPassword.mutationOptions());
 
   const form = useForm<ForgotPasswordValidation>({
     resolver: effectTsResolver(forgotPasswordValidation),

@@ -12,7 +12,7 @@ import { LoginValidation, loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
   const trpc = useTRPC();
-  const login = useMutation(trpc.login.mutationOptions());
+  const login = useMutation(trpc.authentication.login.mutationOptions());
 
   const form = useForm<LoginValidation>({
     resolver: effectTsResolver(loginValidation),
