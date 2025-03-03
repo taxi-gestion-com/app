@@ -13,7 +13,7 @@ import { LoginValidation, loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
   const trpc = useTRPC();
-  const login = useMutation(trpc.authentication.login.mutationOptions());
+  const { mutate, isPending } = useMutation(trpc.authentication.login.mutationOptions());
 
   const form = useForm<LoginValidation>({
     resolver: effectTsResolver(loginValidation),
@@ -26,7 +26,7 @@ export const LoginForm = ({ username }: { username: string }) => {
   const usernameValue = form.watch('username');
 
   const onSubmit = (values: LoginValidation) => {
-    login.mutate(values);
+    mutate(values);
   };
 
   return (
@@ -34,24 +34,22 @@ export const LoginForm = ({ username }: { username: string }) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
-          disabled={login.isPending}
           name='username'
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <EmailField field={field} />
+              <EmailField field={{ ...field, disabled: isPending }} />
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          disabled={login.isPending}
           name='password'
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Mot de passe</FormLabel>
-              <PasswordField field={field} />
+              <PasswordField field={{ ...field, disabled: isPending }} />
               <FormMessage />
             </FormItem>
           )}
@@ -65,8 +63,8 @@ export const LoginForm = ({ username }: { username: string }) => {
             Mot de passe oublié ?
           </Link>
         </div>
-        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={login.isPending}>
-          <Loading isLoading={login.isPending}>Se connecter</Loading>
+        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={isPending}>
+          <Loading isLoading={isPending}>Se connecter</Loading>
         </Button>
       </form>
       <p className='mt-12 text-center'>

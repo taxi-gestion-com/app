@@ -14,7 +14,7 @@ import { RegisterValidation, registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
   const trpc = useTRPC();
-  const register = useMutation(trpc.authentication.register.mutationOptions());
+  const { mutate, isPending } = useMutation(trpc.authentication.register.mutationOptions());
 
   const form = useForm<RegisterValidation>({
     resolver: effectTsResolver(registerValidation),
@@ -28,7 +28,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
   const usernameValue = form.watch('username');
 
   const onSubmit = (values: RegisterValidation) => {
-    register.mutate(values);
+    mutate(values);
   };
 
   return (
@@ -36,24 +36,22 @@ export const RegisterForm = ({ username }: { username: string }) => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
-          disabled={register.isPending}
           name='username'
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <EmailField field={field} />
+              <EmailField field={{ ...field, disabled: isPending }} />
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          disabled={register.isPending}
           name='password'
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Mot de passe</FormLabel>
-              <PasswordField field={field} />
+              <PasswordField field={{ ...field, disabled: isPending }} />
               <FormDescription>Doit contenir minuscule, majuscule, chiffre et caractère spécial</FormDescription>
               <FormMessage />
             </FormItem>
@@ -65,7 +63,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
             <FormItem className='mb-4'>
               <div className='flex items-center space-x-2'>
                 <FormControl>
-                  <Checkbox checked={field.value} disabled={register.isPending} onCheckedChange={field.onChange} />
+                  <Checkbox checked={field.value} disabled={isPending} onCheckedChange={field.onChange} />
                 </FormControl>
                 <FormLabel>
                   J’accepte les <Link href='/terms'>conditions d’utilisation</Link>
@@ -75,8 +73,8 @@ export const RegisterForm = ({ username }: { username: string }) => {
             </FormItem>
           )}
         />
-        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={register.isPending}>
-          <Loading isLoading={register.isPending}>Créer mon compte</Loading>
+        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={isPending}>
+          <Loading isLoading={isPending}>Créer mon compte</Loading>
         </Button>
       </form>
       <p className='mt-12 text-center'>

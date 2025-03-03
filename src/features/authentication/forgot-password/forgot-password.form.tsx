@@ -13,7 +13,7 @@ import { forgotPasswordValidation, ForgotPasswordValidation } from './forgot-pas
 
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
   const trpc = useTRPC();
-  const forgotPassword = useMutation(trpc.authentication.forgotPassword.mutationOptions());
+  const { mutate, isPending } = useMutation(trpc.authentication.forgotPassword.mutationOptions());
 
   const form = useForm<ForgotPasswordValidation>({
     resolver: effectTsResolver(forgotPasswordValidation),
@@ -25,26 +25,25 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
   const usernameValue = form.watch('username');
 
   const onSubmit = (values: ForgotPasswordValidation): void => {
-    forgotPassword.mutate(values);
+    mutate(values);
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
-          disabled={forgotPassword.isPending}
           control={form.control}
           name='username'
           render={({ field }) => (
             <FormItem className='mb-4'>
               <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <EmailField field={field} />
+              <EmailField field={{ ...field, disabled: isPending }} />
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={forgotPassword.isPending}>
-          <Loading isLoading={forgotPassword.isPending}>Envoyer un code de réinitialisation</Loading>
+        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={isPending}>
+          <Loading isLoading={isPending}>Envoyer un code de réinitialisation</Loading>
         </Button>
       </form>
       <p className='mt-12 text-center'>
