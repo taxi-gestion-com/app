@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import superjson from 'superjson';
 import { type AppRouter } from '@/trpc/server';
 import { TRPCProvider } from '../context';
 
@@ -18,9 +19,7 @@ let browserQueryClient: QueryClient | undefined = undefined;
 const isSSR = typeof window === 'undefined';
 
 const getQueryClient = () => {
-  if (isSSR) {
-    return makeQueryClient();
-  }
+  if (isSSR) return makeQueryClient();
   if (!browserQueryClient) browserQueryClient = makeQueryClient();
   return browserQueryClient;
 };
@@ -30,7 +29,7 @@ export const TrpcProvider = ({ children }: { children: ReactNode }) => {
 
   const [trpcClient] = useState(() =>
     createTRPCClient<AppRouter>({
-      links: [httpBatchLink({ url: '/api/trpc' })]
+      links: [httpBatchLink({ url: '/api/trpc', transformer: superjson })]
     })
   );
 

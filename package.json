@@ -38,6 +38,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-icons": "^5.5.0",
+    "superjson": "^2.2.2",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -47,6 +48,7 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.21.0",
     "@tailwindcss/postcss": "^4.0.9",
+    "@tanstack/eslint-plugin-query": "^5.67.2",
     "@types/node": "^22.13.8",
     "@types/pg": "^8.11.11",
     "@types/react": "^19.0.10",

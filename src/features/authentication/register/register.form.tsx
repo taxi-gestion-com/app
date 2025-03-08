@@ -1,14 +1,14 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
-import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useForm, useWatch } from 'react-hook-form';
+import { effectTsResolver } from '@hookform/resolvers/effect-ts';
+import { useMutation } from '@tanstack/react-query';
+import { useTRPC } from '@/trpc/client';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
 import { Loading } from '@/lib/ui/elements/loading';
-import { useTRPC } from '@/trpc/client';
 import { EmailField, PasswordField } from '../_presentation';
 import { RegisterValidation, registerValidation } from './register.validation';
 
