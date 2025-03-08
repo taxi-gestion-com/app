@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { effectTsResolver } from '@hookform/resolvers/effect-ts';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
@@ -25,15 +25,11 @@ export const RegisterForm = ({ username }: { username: string }) => {
     }
   });
 
-  const usernameValue = form.watch('username');
-
-  const onSubmit = (values: RegisterValidation) => {
-    mutate(values);
-  };
+  const usernameValue = useWatch({ name: 'username', control: form.control });
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit((values: RegisterValidation) => mutate(values))}>
         <FormField
           control={form.control}
           name='username'
