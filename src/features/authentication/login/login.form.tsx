@@ -3,17 +3,16 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useMutation } from '@tanstack/react-query';
-import { useTRPC } from '@/trpc/client';
 import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Loading } from '@/lib/ui/elements/loading';
 import { EmailField, PasswordField } from '../_presentation';
-import { LoginValidation, loginValidation } from './login.validation';
+import { loginAction } from './login.action';
+import { type LoginValidation, loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
-  const trpc = useTRPC();
-  const { mutate, isPending } = useMutation(trpc.authentication.login.mutationOptions());
+  const { isPending, mutate } = useMutation({ mutationFn: loginAction });
 
   const form = useForm<LoginValidation>({
     resolver: effectTsResolver(loginValidation),

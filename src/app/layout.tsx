@@ -7,7 +7,7 @@ import { appPageTitle } from '@/features/web';
 import { Footer } from '@/lib/ui/blocks';
 import { Link } from '@/lib/ui/elements/link';
 import { ThemeProvider } from '@/lib/ui/theme/providers';
-import { TrpcProvider } from '@/trpc/client/providers';
+import { ReactQueryProvider } from '@/lib/react-query';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,7 +30,7 @@ const RootLayout = ({
 }>) => (
   <html lang='en' suppressHydrationWarning>
     <body className={`${geistSans.variable} ${geistMono.variable} bg-body text-foreground antialiased`}>
-      <TrpcProvider>
+      <ReactQueryProvider>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
           {children}
           <Footer
@@ -129,7 +129,7 @@ const RootLayout = ({
             ]}
           />
         </ThemeProvider>
-      </TrpcProvider>
+      </ReactQueryProvider>
     </body>
   </html>
 );
