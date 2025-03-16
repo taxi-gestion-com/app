@@ -1,4 +1,4 @@
-import { boolean, integer, pgTable, primaryKey, text } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, primaryKey, text, uuid } from 'drizzle-orm/pg-core';
 import { usersTable } from './users.table';
 
 const AUTHENTICATOR_TABLE = 'authenticator';
@@ -6,8 +6,8 @@ const AUTHENTICATOR_TABLE = 'authenticator';
 export const authenticatorsTable = pgTable(
   AUTHENTICATOR_TABLE,
   {
-    credentialID: text('credentialID').notNull().unique(),
-    userId: text('userId')
+    credentialID: uuid('credentialID').notNull().unique(),
+    userId: uuid('userId')
       .notNull()
       .references(() => usersTable.id, { onDelete: 'cascade' }),
     providerAccountId: text('providerAccountId').notNull(),

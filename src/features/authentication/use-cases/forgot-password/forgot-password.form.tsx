@@ -7,12 +7,12 @@ import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Loading } from '@/lib/ui/elements/loading';
-import { EmailField } from '../_presentation';
-import { forgotPasswordAction } from './forgot-password.action';
+import { EmailField } from '../../presentation';
+import { forgotPasswordMutation } from './forgot-password.mutation';
 import { type ForgotPasswordValidation, forgotPasswordValidation } from './forgot-password.validation';
 
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
-  const { mutate, isPending } = useMutation({ mutationFn: forgotPasswordAction });
+  const { mutate, isPending } = useMutation({ mutationFn: forgotPasswordMutation });
 
   const form = useForm<ForgotPasswordValidation>({
     resolver: effectTsResolver(forgotPasswordValidation),

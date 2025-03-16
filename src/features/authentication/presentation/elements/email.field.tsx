@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import { RiMailLine } from 'react-icons/ri';

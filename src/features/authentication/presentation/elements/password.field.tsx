@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode, useState } from 'react';
 import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import { RiEyeLine, RiEyeOffLine, RiLockLine } from 'react-icons/ri';

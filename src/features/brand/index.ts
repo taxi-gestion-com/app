@@ -1,2 +1,1 @@
-export * from './home';
-export * from './illustrations';
+export * from './use-cases';

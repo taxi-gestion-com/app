@@ -1,6 +1,6 @@
 CREATE TABLE "authenticator" (
-	"credentialID" text NOT NULL,
-	"userId" text NOT NULL,
+	"credentialID" uuid NOT NULL,
+	"userId" uuid NOT NULL,
 	"providerAccountId" text NOT NULL,
 	"credentialPublicKey" text NOT NULL,
 	"counter" integer NOT NULL,
@@ -13,12 +13,12 @@ CREATE TABLE "authenticator" (
 --> statement-breakpoint
 CREATE TABLE "session" (
 	"sessionToken" text PRIMARY KEY NOT NULL,
-	"userId" text NOT NULL,
+	"userId" uuid NOT NULL,
 	"expires" timestamp NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"name" text,
 	"email" text,
 	"hashedPassword" text,

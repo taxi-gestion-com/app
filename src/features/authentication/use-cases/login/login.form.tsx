@@ -7,12 +7,12 @@ import { Button } from '@/lib/ui/elements/button';
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
 import { Link } from '@/lib/ui/elements/link';
 import { Loading } from '@/lib/ui/elements/loading';
-import { EmailField, PasswordField } from '../_presentation';
-import { loginAction } from './login.action';
+import { EmailField, PasswordField } from '../../presentation';
+import { loginMutation } from './login.mutation';
 import { type LoginValidation, loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
-  const { isPending, mutate } = useMutation({ mutationFn: loginAction });
+  const { isPending, mutate } = useMutation({ mutationFn: loginMutation });
 
   const form = useForm<LoginValidation>({
     resolver: effectTsResolver(loginValidation),

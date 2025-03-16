@@ -1,4 +1,4 @@
-import { authenticatorsTable, sessionsTable, usersTable, verificationTokensTable } from '@/features/authentication/_db';
+import { authenticatorsTable, sessionsTable, usersTable, verificationTokensTable } from '@/features/authentication';
 
 export const users = usersTable;
 export const sessions = sessionsTable;

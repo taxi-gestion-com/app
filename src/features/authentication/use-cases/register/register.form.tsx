@@ -8,12 +8,12 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Link } from '@/lib/ui/elements/link';
 import { Checkbox } from '@/lib/ui/elements/checkbox';
 import { Loading } from '@/lib/ui/elements/loading';
-import { EmailField, PasswordField } from '../_presentation';
-import { registerAction } from './register.action';
+import { EmailField, PasswordField } from '../../presentation';
+import { registerMutation } from './register.mutation';
 import { type RegisterValidation, registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
-  const { mutate, isPending } = useMutation({ mutationFn: registerAction });
+  const { mutate, isPending } = useMutation({ mutationFn: registerMutation });
 
   const form = useForm<RegisterValidation>({
     resolver: effectTsResolver(registerValidation),
