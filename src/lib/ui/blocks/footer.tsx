@@ -26,10 +26,10 @@ export const Footer = ({
 }) => (
   <footer className='border-body-tertiary border-t border-solid'>
     {size === 'lg' && (
-      <div className='text-muted bg-body-secondary py-12'>
+      <div className='text-base-content/60 bg-body-secondary py-12'>
         <div className='container mx-auto flex flex-col justify-between gap-6 px-6 md:flex-row'>
           <div>
-            <Logo color='muted-foreground' className='max-w-80 pb-4' />
+            <Logo color='color-neutral' className='max-w-80 pb-4' />
             <ThemeChanger />
           </div>
           {categories.length > 0 && (
@@ -51,7 +51,7 @@ export const Footer = ({
         </div>
       </div>
     )}
-    <div className='bg-body-tertiary text-muted flex justify-between py-6'>
+    <div className='bg-body-tertiary text-base-content/60 flex justify-between py-6'>
       <div className='container mx-auto flex flex-col items-center justify-between gap-6 px-6 md:flex-row'>
         <nav aria-label='Legal and Resource Links'>
           <ul className='flex flex-row flex-wrap gap-4 text-xs'>

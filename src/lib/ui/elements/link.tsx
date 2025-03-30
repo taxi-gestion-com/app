@@ -15,7 +15,7 @@ export const Link = ({
   href: UrlObject | string;
   variant?: 'primary' | 'none';
   className?: string;
-  children?: string;
+  children?: ReactNode | string;
   target?: '_blank';
   icon?: ReactNode;
   iconOnly?: boolean;
@@ -28,7 +28,7 @@ export const Link = ({
       target={target}
       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
       href={href}
-      title={iconOnly ? children : undefined}>
+      title={iconOnly && typeof children === 'string' ? children : undefined}>
       {icon && <span>{icon}</span>}
       {children && !iconOnly && <span>{children}</span>}
     </NextLink>
