@@ -1,76 +1,60 @@
 'use client';
 
-import { useForm, useWatch } from 'react-hook-form';
-import { effectTsResolver } from '@hookform/resolvers/effect-ts';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from '@/lib/ui/elements/button';
-import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
-import { Link } from '@/lib/ui/elements/link';
-import { Loading } from '@/lib/ui/elements/loading';
-import { EmailField, PasswordField } from '../../presentation';
+import { applyEffectSchema, handleSubmit, useAppForm } from '@/lib/react-form';
 import { loginMutation } from './login.mutation';
-import { type LoginValidation, loginValidation } from './login.validation';
+import { loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
   const { isPending, mutate } = useMutation({ mutationFn: loginMutation });
 
-  const form = useForm<LoginValidation>({
-    resolver: effectTsResolver(loginValidation),
+  const form = useAppForm({
     defaultValues: {
       username,
       password: ''
-    }
+    },
+    validators: {
+      onChange: applyEffectSchema(loginValidation)
+    },
+    onSubmit: async ({ value }) => mutate(value)
   });
 
-  const usernameValue = useWatch({ name: 'username', control: form.control });
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit((values: LoginValidation) => mutate(values))}>
-        <FormField
-          control={form.control}
-          name='username'
-          render={({ field }) => (
-            <FormItem className='mb-4'>
-              <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <EmailField field={{ ...field, disabled: isPending }} />
-              <FormMessage />
-            </FormItem>
+    <form.AppForm>
+      <form onSubmit={handleSubmit(form)}>
+        <form.AppField name='username'>
+          {(field) => (
+            <field.Item>
+              <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
+              <field.Text isPending={isPending} />
+              <field.Info />
+            </field.Item>
           )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem className='mb-4'>
-              <FormLabel>Mot de passe</FormLabel>
-              <PasswordField field={{ ...field, disabled: isPending }} />
-              <FormMessage />
-            </FormItem>
+        </form.AppField>
+        <form.AppField name='password'>
+          {(field) => (
+            <field.Item>
+              <field.Label>Mot de passe</field.Label>
+              <field.Text type='password' isPending={isPending} />
+              <field.Info />
+            </field.Item>
           )}
-        />
+        </form.AppField>
         <div className='text-end'>
-          <Link
-            href={{
-              pathname: '/forgot-password',
-              query: usernameValue.length > 0 ? { username: usernameValue } : {}
-            }}>
-            Mot de passe oublié ?
-          </Link>
+          <form.QueryLink pathname='/forgot-password' queryParam='username'>
+            Mot de passe oublié&nbsp;?
+          </form.QueryLink>
         </div>
-        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={isPending}>
-          <Loading isLoading={isPending}>Se connecter</Loading>
-        </Button>
+        <form.Submit isPending={isPending} size='btn-lg' modifier='btn-block' className='mt-12'>
+          Se connecter
+        </form.Submit>
       </form>
       <p className='mt-12 text-center'>
-        <Link
-          href={{
-            pathname: '/register',
-            query: usernameValue.length > 0 ? { username: usernameValue } : {}
-          }}>
+        Pas encore de compte ?&ensp;
+        <form.QueryLink pathname='/register' queryParam='username'>
           Créez le dès à présent&nbsp;!
-        </Link>
+        </form.QueryLink>
       </p>
-    </Form>
+    </form.AppForm>
   );
 };

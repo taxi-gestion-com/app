@@ -10,7 +10,7 @@ export const Loading = ({
   className?: string;
   children: ReactNode;
 }) => (
-  <div className='flex h-full items-center justify-center'>
+  <span className='flex h-full items-center justify-center'>
     {isLoading ? <span className={cn('loading', className)} aria-hidden={true} /> : children}
-  </div>
+  </span>
 );

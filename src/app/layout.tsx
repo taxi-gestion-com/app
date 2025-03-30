@@ -29,9 +29,9 @@ const RootLayout = ({
   children: ReactNode;
 }>) => (
   <html lang='en' suppressHydrationWarning>
-    <body className={`${geistSans.variable} ${geistMono.variable} bg-body text-foreground antialiased`}>
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <ReactQueryProvider>
-        <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute='data-theme' defaultTheme='dark' enableSystem disableTransitionOnChange>
           {children}
           <Footer
             company='Red Green Refactor'

@@ -17,8 +17,8 @@ export const Logo = ({ color, className }: { color?: string; className?: string 
           y1='58.701'
           x2='220.506'
           y2='58.701'>
-          <stop style={{ stopColor: 'var(--primary)', stopOpacity: 1 }} offset='0' />
-          <stop style={{ stopColor: 'var(--primary-subtle)', stopOpacity: 1 }} offset='1' />
+          <stop style={{ stopColor: 'var(--color-primary)', stopOpacity: 1 }} offset='0' />
+          <stop style={{ stopColor: 'var(--color-primary)', stopOpacity: 0.87 }} offset='1' />
         </linearGradient>
         <linearGradient
           id='name'
@@ -28,8 +28,8 @@ export const Logo = ({ color, className }: { color?: string; className?: string 
           x2='287.473'
           y2='33.28'
           gradientTransform='translate(-118.02,-23.783)'>
-          <stop style={{ stopColor: 'var(--primary)', stopOpacity: 1 }} offset='0' />
-          <stop style={{ stopColor: 'var(--primary-subtle)', stopOpacity: 1 }} offset='1' />
+          <stop style={{ stopColor: 'var(--color-primary)', stopOpacity: 1 }} offset='0' />
+          <stop style={{ stopColor: 'var(--color-primary)', stopOpacity: 0.87 }} offset='1' />
         </linearGradient>
       </defs>
       <path
