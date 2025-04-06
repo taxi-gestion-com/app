@@ -1,9 +1,10 @@
 'use server';
 
-import { db, users } from '@/db';
-import { publicProcedure } from '@/lib/trpc';
 import { eq } from 'drizzle-orm';
 import { Schema } from 'effect';
+import { db } from '@/db';
+import { usersTable } from '@/features/authentication';
+import { publicProcedure } from '@/lib/trpc';
 
 const validation = Schema.Struct({
   userId: Schema.String
@@ -14,6 +15,6 @@ export const welcomeUserQuery = publicProcedure
   .query(async ({ input: { userId } }) => {
     return db.query.users.findFirst({
       columns: { name: true },
-      where: eq(users.id, userId)
+      where: eq(usersTable.id, userId)
     });
   });

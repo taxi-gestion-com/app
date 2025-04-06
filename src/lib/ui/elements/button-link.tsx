@@ -1,34 +1,31 @@
 import type { HTMLAttributeAnchorTarget, HTMLAttributes, ReactNode } from 'react';
-import NextLink, { type LinkProps as NextLinkProps } from 'next/link';
+import NextLink from 'next/link';
+import type { LinkProps as NextLinkProps } from 'next/dist/client/link';
 import { cn } from '@/lib/utils';
-import type { Color } from './color';
+import type { ButtonClass } from './button';
 
-export type LinkClass<Prefix extends `${string}link` = 'link'> = {
-  color?: `${Prefix}-${Color}` | 'none';
-  kind?: `${Prefix}-${'hover'}` | 'none';
-};
-
-export type LinkProps = NextLinkProps &
-  LinkClass & {
+export type ButtonLinkProps = NextLinkProps &
+  ButtonClass & {
     icon?: ReactNode;
     iconOnly?: boolean;
     target?: HTMLAttributeAnchorTarget;
   } & HTMLAttributes<HTMLAnchorElement>;
 
-const linkClass: LinkClass = { color: 'link-primary', kind: 'link-hover' };
-
-export const Link = ({
+export const ButtonLink = ({
   className,
   children,
   target,
+  color,
   icon,
   iconOnly,
-  color = linkClass.color,
-  kind = linkClass.kind,
+  kind,
+  behavior,
+  scale,
+  modifier,
   ...props
-}: LinkProps) => (
+}: ButtonLinkProps) => (
   <NextLink
-    className={cn('link', color != 'none' && color, kind != 'none' && kind, className)}
+    className={cn('btn', color, kind, behavior, scale, modifier, className)}
     target={target}
     rel={target === '_blank' ? 'noopener noreferrer' : undefined}
     title={iconOnly && typeof children === 'string' ? children : undefined}

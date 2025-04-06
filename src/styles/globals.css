@@ -12,111 +12,39 @@
   logs: false;
 }
 
+@theme {
+  --color-muted: oklch(0.7 0 90);
+  --color-base-400: oklch(0.85 0 90);
+  --color-base-500: oklch(0.8 0 90);
+  --color-primary-subtle: oklch(0.6 0.19 260);
+}
+
 @plugin "daisyui/theme" {
   name: 'light';
   default: true;
-  --color-primary: hsl(216, 95%, 44%);
-  --color-secondary: teal;
+
+  --color-base-100: oklch(1 0 90);
+  --color-base-200: oklch(0.95 0 90);
+  --color-base-300: oklch(0.9 0 90);
+  --color-base-400: oklch(0.85 0 90);
+  --color-base-500: oklch(0.8 0 90);
+  --color-base-content: oklch(0.015 0 90);
+  --color-primary: oklch(0.5 0.2 260);
+  --color-primary-subtle: oklch(0.6 0.19 260);
+  --color-muted: oklch(0.5 0 17);
 }
 
-/*@custom-variant dark (&:is(.dark *));*/
+@plugin "daisyui/theme" {
+  name: 'dark';
+  default: true;
 
-/*:root {*/
-/*  --body: hsl(0 0% 100%);*/
-/*  --body-secondary: hsl(0, 0%, 96%);*/
-/*  --body-tertiary: hsl(0, 0%, 92%);*/
-/*  --foreground: hsl(20 14.3% 4.1%);*/
-/*  --primary: hsl(216, 95%, 44%);*/
-/*  --primary-subtle: hsl(210, 93%, 46%);*/
-/*  --primary-foreground: hsl(0 0% 100%);*/
-/*  --muted: hsl(0 0% 50%);*/
-/*  --muted-foreground: hsl(0 0% 78%);*/
-/*  --input: hsl(20 5.9% 90%);*/
-/*  --input-subtle: hsl(0 0% 97%);*/
-
-/*  --card: hsl(0 0% 100%);*/
-/*  --card-foreground: hsl(20 14.3% 4.1%);*/
-/*  --popover: hsl(0 0% 100%);*/
-/*  --popover-foreground: hsl(20 14.3% 4.1%);*/
-/*  --secondary: hsl(60 4.8% 95.9%);*/
-/*  --secondary-foreground: hsl(24 9.8% 10%);*/
-/*  --accent: hsl(60 4.8% 95.9%);*/
-/*  --accent-foreground: hsl(24 9.8% 10%);*/
-/*  --destructive: hsl(0 84.2% 60.2%);*/
-/*  --destructive-foreground: hsl(60 9.1% 97.8%);*/
-/*  --border: hsl(20 5.9% 90%);*/
-/*  --ring: var(--primary);*/
-/*  --chart-1: hsl(12 76% 61%);*/
-/*  --chart-2: hsl(173 58% 39%);*/
-/*  --chart-3: hsl(197 37% 24%);*/
-/*  --chart-4: hsl(43 74% 66%);*/
-/*  --chart-5: hsl(27 87% 67%);*/
-/*  --radius: 0.6rem;*/
-/*}*/
-
-/*.dark {*/
-/*  --body: hsl(0, 0%, 9%);*/
-/*  --body-secondary: hsl(0, 0%, 12%);*/
-/*  --body-tertiary: hsl(0, 0%, 17%);*/
-/*  --foreground: hsl(60, 9%, 98%);*/
-/*  --primary: #716dff;*/
-/*  --primary-subtle: #6562fb;*/
-/*  --primary-foreground: hsl(0 0% 100%);*/
-/*  --muted: hsl(0 0% 60%);*/
-/*  --muted-foreground: hsl(0 0% 30%);*/
-/*  --input: hsl(12 6.5% 15.1%);*/
-/*  --input-subtle: hsl(0 0% 5%);*/
-
-/*  --card: hsl(20 14.3% 4.1%);*/
-/*  --card-foreground: hsl(60 9.1% 97.8%);*/
-/*  --popover: hsl(20 14.3% 4.1%);*/
-/*  --popover-foreground: hsl(60 9.1% 97.8%);*/
-/*  --secondary: hsl(12 6.5% 15.1%);*/
-/*  --secondary-foreground: hsl(60 9.1% 97.8%);*/
-/*  --accent: hsl(12 6.5% 15.1%);*/
-/*  --accent-foreground: hsl(60 9.1% 97.8%);*/
-/*  --destructive: hsl(0 84.2% 60.2%);*/
-/*  --destructive-foreground: hsl(60 9.1% 97.8%);*/
-/*  --border: hsl(12 6.5% 15.1%);*/
-/*  --ring: var(--primary);*/
-/*  --chart-1: hsl(220 70% 50%);*/
-/*  --chart-2: hsl(160 60% 45%);*/
-/*  --chart-3: hsl(30 80% 55%);*/
-/*  --chart-4: hsl(280 65% 60%);*/
-/*  --chart-5: hsl(340 75% 55%);*/
-/*}*/
-
-/*@theme inline {*/
-/*  --color-primary: var(--primary);*/
-/*  --color-primary-foreground: var(--primary-foreground);*/
-/*  --color-body: var(--body);*/
-/*  --color-body-secondary: var(--body-secondary);*/
-/*  --color-body-tertiary: var(--body-tertiary);*/
-/*  --color-foreground: var(--foreground);*/
-/*  --color-muted: var(--muted);*/
-/*  --color-muted-foreground: var(--muted-foreground);*/
-/*  --color-input: var(--input);*/
-/*  --color-input-subtle: var(--input-subtle);*/
-
-/*  --color-card: var(--card);*/
-/*  --color-card-foreground: var(--card-foreground);*/
-/*  --color-popover: var(--popover);*/
-/*  --color-popover-foreground: var(--popover-foreground);*/
-/*  --color-secondary: var(--secondary);*/
-/*  --color-secondary-foreground: var(--secondary-foreground);*/
-/*  --color-accent: var(--accent);*/
-/*  --color-accent-foreground: var(--accent-foreground);*/
-/*  --color-destructive: var(--destructive);*/
-/*  --color-destructive-foreground: var(--destructive-foreground);*/
-/*  --color-border: var(--border);*/
-/*  --color-ring: var(--ring);*/
-/*  --color-chart-1: var(--chart-1);*/
-/*  --color-chart-2: var(--chart-2);*/
-/*  --color-chart-3: var(--chart-3);*/
-/*  --color-chart-4: var(--chart-4);*/
-/*  --color-chart-5: var(--chart-5);*/
-/*  --radius-sm: calc(var(--radius) - 4px);*/
-/*  --radius-md: calc(var(--radius) - 2px);*/
-/*  --radius-lg: var(--radius);*/
-/*  --radius-xl: calc(var(--radius) + 4px);*/
-/*}*/
+  --color-base-100: oklch(0.2 0 90);
+  --color-base-200: oklch(0.25 0 90);
+  --color-base-300: oklch(0.3 0 90);
+  --color-base-400: oklch(0.35 0 90);
+  --color-base-500: oklch(0.4 0 90);
+  --color-base-content: oklch(0.985 0 90);
+  --color-primary: oklch(0.6 0.2 280);
+  --color-primary-subtle: oklch(0.54 0.2 280);
+  --color-muted: oklch(0.7 0 90);
+}

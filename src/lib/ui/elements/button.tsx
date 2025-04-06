@@ -1,16 +1,18 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
+import type { Color } from './color';
+import type { Scale } from './scale';
 
 export type ButtonClass<Prefix extends `${string}btn` = 'btn'> = {
-  color?: `${Prefix}-${'neutral' | 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}`;
-  style?: `${Prefix}-${'outline' | 'dash' | 'soft' | 'ghost' | 'link'}`;
+  color?: `${Prefix}-${Color}`;
+  kind?: `${Prefix}-${'outline' | 'dash' | 'soft' | 'ghost' | 'link'}`;
   behavior?: `${Prefix}-${'active' | 'disabled'}`;
-  size?: `${Prefix}-${'xs' | 'sm' | 'md' | 'lg' | 'xl'}`;
+  scale?: `${Prefix}-${Scale}`;
   modifier?: `${Prefix}-${'wide' | 'block' | 'square' | 'circle'}`;
 };
 
 export type ButtonProps = ComponentProps<'button'> & ButtonClass;
 
-export const Button = ({ className, color, style, behavior, size, modifier, ...props }: ButtonProps) => (
-  <button className={cn('btn', color, style, behavior, size, modifier, className)} {...props} />
+export const Button = ({ className, color, kind, behavior, scale, modifier, ...props }: ButtonProps) => (
+  <button className={cn('btn', color, kind, behavior, scale, modifier, className)} {...props} />
 );

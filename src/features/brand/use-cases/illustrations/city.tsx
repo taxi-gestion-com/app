@@ -21,8 +21,8 @@ export const City = ({ className, children }: { className?: string; children?: R
             y1='58.701'
             x2='220.506'
             y2='58.701'>
-            <stop style={{ stopColor: 'var(--color-primary)', stopOpacity: 1 }} offset='0' />
-            <stop style={{ stopColor: 'var(--color-primary)', stopOpacity: 0.87 }} offset='1' />
+            <stop style={{ stopColor: 'var(--color-primary)' }} offset='0' />
+            <stop style={{ stopColor: 'var(--color-primary-subtle)' }} offset='1' />
           </linearGradient>
         </defs>
         <path style={{ fill: 'url(#city)' }} d='M0 0h199.524v137.504H0Z' />
@@ -35,7 +35,6 @@ export const City = ({ className, children }: { className?: string; children?: R
         />
       </svg>
       {children}
-      aaa
     </div>
   </>
 );

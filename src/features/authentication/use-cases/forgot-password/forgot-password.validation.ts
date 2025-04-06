@@ -5,5 +5,3 @@ export const forgotPasswordValidation = Schema.Struct({
     Schema.minLength(1, { message: () => 'Saisissez votre adresse électronique ou numéro de téléphone portable' })
   )
 });
-
-export type ForgotPasswordValidation = typeof forgotPasswordValidation.Type;

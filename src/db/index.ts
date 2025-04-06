@@ -1,8 +1,10 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { DATABASE_URL } from '@/settings';
-import * as schema from './schema';
+import { authenticationSchema } from '@/features/authentication';
 
-export const db = drizzle(DATABASE_URL, { schema });
-
-export * from './schema';
+export const db = drizzle(DATABASE_URL, {
+  schema: {
+    ...authenticationSchema
+  }
+});

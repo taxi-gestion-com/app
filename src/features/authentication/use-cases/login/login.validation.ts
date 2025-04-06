@@ -6,5 +6,3 @@ export const loginValidation = Schema.Struct({
   ),
   password: Schema.String.pipe(Schema.minLength(1, { message: () => 'Saisissez le mot de passe de votre compte' }))
 });
-
-export type LoginValidation = typeof loginValidation.Type;
