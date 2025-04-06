@@ -1,12 +1,14 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
-import { applyEffectSchema, handleSubmit, useAppForm } from '@/lib/react-form';
+import { RiEyeLine, RiEyeOffLine, RiMailLine, RiLockLine } from 'react-icons/ri';
+import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/lib/react-form';
+import { Button } from '@/lib/ui/elements/button';
+import { ToggleState } from '@/lib/ui/elements/toggle-state';
 import { loginMutation } from './login.mutation';
 import { loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
-  const { isPending, mutate } = useMutation({ mutationFn: loginMutation });
+  const [action, isPending] = useAction(loginMutation);
 
   const form = useAppForm({
     defaultValues: {
@@ -16,17 +18,17 @@ export const LoginForm = ({ username }: { username: string }) => {
     validators: {
       onChange: applyEffectSchema(loginValidation)
     },
-    onSubmit: async ({ value }) => mutate(value)
+    onSubmit: handleAction(action)
   });
 
   return (
     <form.AppForm>
-      <form onSubmit={handleSubmit(form)}>
+      <form {...formProps(action)(form)}>
         <form.AppField name='username'>
           {(field) => (
             <field.Item>
               <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
-              <field.Text isPending={isPending} />
+              <field.Input isPending={isPending} scale='input-lg' left={<RiMailLine className='opacity-40' />} />
               <field.Info />
             </field.Item>
           )}
@@ -35,7 +37,21 @@ export const LoginForm = ({ username }: { username: string }) => {
           {(field) => (
             <field.Item>
               <field.Label>Mot de passe</field.Label>
-              <field.Text type='password' isPending={isPending} />
+              <ToggleState>
+                {(isActive: boolean, toggleActive: () => void) => (
+                  <field.Input
+                    type={isActive ? 'text' : 'password'}
+                    isPending={isPending}
+                    scale='input-lg'
+                    left={<RiLockLine className='opacity-40' />}
+                    right={
+                      <Button type='button' className='px-1' kind='btn-link' onClick={toggleActive}>
+                        {isActive ? <RiEyeOffLine size='20' /> : <RiEyeLine size='20' />}
+                      </Button>
+                    }
+                  />
+                )}
+              </ToggleState>
               <field.Info />
             </field.Item>
           )}
@@ -45,7 +61,7 @@ export const LoginForm = ({ username }: { username: string }) => {
             Mot de passe oublié&nbsp;?
           </form.QueryLink>
         </div>
-        <form.Submit isPending={isPending} size='btn-lg' modifier='btn-block' className='mt-12'>
+        <form.Submit isPending={isPending} scale='btn-lg' modifier='btn-block' className='mt-12'>
           Se connecter
         </form.Submit>
       </form>

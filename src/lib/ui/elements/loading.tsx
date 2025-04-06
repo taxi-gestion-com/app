@@ -1,16 +1,18 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import type { Scale } from './scale';
 
-export const Loading = ({
-  isLoading = false,
-  className,
-  children
-}: {
+export type LoadingClass<Prefix extends `${string}loading` = 'loading'> = {
+  style?: `${Prefix}-${'ball' | 'bars' | 'infinity'}`;
+  scale?: `${Prefix}-${Scale}`;
+};
+
+export type LoadingProps = {
   isLoading: boolean;
   className?: string;
   children: ReactNode;
-}) => (
-  <span className='flex h-full items-center justify-center'>
-    {isLoading ? <span className={cn('loading', className)} aria-hidden={true} /> : children}
-  </span>
+} & LoadingClass;
+
+export const Loading = ({ isLoading = false, className, children, style, scale }: LoadingProps) => (
+  <>{isLoading ? <span className={cn('loading', style, scale, className)} aria-hidden={true} /> : children}</>
 );

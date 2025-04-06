@@ -1,5 +1,5 @@
-import { DashboardPage } from '@/features/overview';
 import { Metadata } from 'next';
+import { DashboardPage } from '@/features/overview';
 import { appPageTitle } from '@/features/web';
 
 export const metadata: Metadata = {

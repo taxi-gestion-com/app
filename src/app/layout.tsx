@@ -1,12 +1,13 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { RiGithubFill, RiTwitterXFill } from 'react-icons/ri';
 import '@/styles/globals.css';
 import { appPageTitle } from '@/features/web';
-import { Footer } from '@/lib/ui/blocks';
-import { Link } from '@/lib/ui/elements/link';
+import { Logo } from '@/features/brand';
+import { type Category, type FooterLink, Footer, FooterLegal, FooterSocialLinks } from '@/lib/ui/blocks/footer';
 import { ThemeProvider } from '@/lib/ui/theme/providers';
+import { ThemeChanger } from '@/lib/ui/elements/theme-changer';
 import { ReactQueryProvider } from '@/lib/react-query';
 
 const geistSans = Geist({
@@ -23,111 +24,62 @@ export const metadata: Metadata = {
   title: appPageTitle()
 };
 
+const footerCategories: Category[] = [
+  {
+    name: 'Entreprise',
+    links: [
+      { key: 'about', linkProps: { href: '/about', children: 'À propos' } },
+      { key: 'contact', linkProps: { href: '/contact', children: 'Contact' } }
+    ]
+  },
+  {
+    name: 'Support',
+    links: [{ key: 'accessibility', linkProps: { href: '/accessibility', children: 'Accessibilité' } }]
+  },
+  {
+    name: 'Resources',
+    links: [{ key: 'brand', linkProps: { href: '/brand', children: 'Marque et logo' } }]
+  },
+  {
+    name: 'Développeurs',
+    links: [{ key: 'docs', linkProps: { href: '/docs', children: 'Documentation' } }]
+  }
+];
+
+const socialLinks: FooterLink[] = [
+  {
+    key: 'twitter',
+    linkProps: { href: 'https://twitter.com/redgreenrefactor', icon: <RiTwitterXFill size='24' />, children: 'Twitter' }
+  },
+  {
+    key: 'github',
+    linkProps: { href: 'https://www.github.com/redgreenrefactor', icon: <RiGithubFill size='24' />, children: 'GitHub' }
+  }
+];
+
 const RootLayout = ({
   children
 }: Readonly<{
   children: ReactNode;
 }>) => (
-  <html lang='en' suppressHydrationWarning>
+  <html lang='en' suppressHydrationWarning data-theme='light'>
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <ReactQueryProvider>
         <ThemeProvider attribute='data-theme' defaultTheme='dark' enableSystem disableTransitionOnChange>
           {children}
-          <Footer
-            company='Red Green Refactor'
-            privacyPolicyLink='/privacy'
-            termsOfServiceLink='/terms'
-            categories={[
-              {
-                name: 'Entreprise',
-                links: [
-                  {
-                    key: 'about',
-                    element: (
-                      <Link variant='none' href='/about'>
-                        À propos
-                      </Link>
-                    )
-                  },
-                  {
-                    key: 'contact',
-                    element: (
-                      <Link variant='none' href='/contact'>
-                        Contact
-                      </Link>
-                    )
-                  }
-                ]
-              },
-              {
-                name: 'Support',
-                links: [
-                  {
-                    key: 'accessibility',
-                    element: (
-                      <Link variant='none' href='/accessibility'>
-                        Accessibilité
-                      </Link>
-                    )
-                  }
-                ]
-              },
-              {
-                name: 'Resources',
-                links: [
-                  {
-                    key: 'brand',
-                    element: (
-                      <Link variant='none' href='/brand'>
-                        Marque et logo
-                      </Link>
-                    )
-                  }
-                ]
-              },
-              {
-                name: 'Développeurs',
-                links: [
-                  {
-                    key: 'docs',
-                    element: (
-                      <Link variant='none' href='/docs'>
-                        Documentation
-                      </Link>
-                    )
-                  }
-                ]
-              }
-            ]}
-            socialNetworks={[
-              {
-                key: 'twitter',
-                element: (
-                  <Link
-                    variant='none'
-                    href='https://twitter.com/redgreenrefactor'
-                    icon={<RiTwitterXFill size='20' />}
-                    iconOnly={true}
-                    target='_blank'>
-                    Twitter
-                  </Link>
-                )
-              },
-              {
-                key: 'github',
-                element: (
-                  <Link
-                    variant='none'
-                    href='https://www.github.com/redgreenrefactor'
-                    icon={<RiGithubFill size='20' />}
-                    iconOnly={true}
-                    target='_blank'>
-                    GitHub
-                  </Link>
-                )
-              }
-            ]}
-          />
+          <div className='border-base-300 text-muted border-t border-solid'>
+            <Footer className='bg-base-200' categories={footerCategories}>
+              <Logo color='color-base-500' className='max-w-80 pb-4' />
+              <ThemeChanger />
+            </Footer>
+            <FooterLegal
+              className='bg-base-300'
+              company='Red Green Refactor'
+              privacyPolicyLink='/privacy'
+              termsOfServiceLink='/terms'>
+              <FooterSocialLinks links={socialLinks}></FooterSocialLinks>
+            </FooterLegal>
+          </div>
         </ThemeProvider>
       </ReactQueryProvider>
     </body>

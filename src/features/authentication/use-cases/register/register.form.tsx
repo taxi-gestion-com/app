@@ -1,87 +1,87 @@
 'use client';
 
-import { useForm, useWatch } from 'react-hook-form';
-import { effectTsResolver } from '@hookform/resolvers/effect-ts';
-import { useMutation } from '@tanstack/react-query';
+import { RiEyeLine, RiEyeOffLine, RiLockLine, RiMailLine } from 'react-icons/ri';
+import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/lib/react-form';
 import { Button } from '@/lib/ui/elements/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/elements/form';
+import { ToggleState } from '@/lib/ui/elements/toggle-state';
 import { Link } from '@/lib/ui/elements/link';
-import { Checkbox } from '@/lib/ui/elements/checkbox';
-import { Loading } from '@/lib/ui/elements/loading';
-import { EmailField, PasswordField } from '../../presentation';
 import { registerMutation } from './register.mutation';
-import { type RegisterValidation, registerValidation } from './register.validation';
+import { registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
-  const { mutate, isPending } = useMutation({ mutationFn: registerMutation });
+  const [action, isPending] = useAction(registerMutation);
 
-  const form = useForm<RegisterValidation>({
-    resolver: effectTsResolver(registerValidation),
+  const form = useAppForm({
     defaultValues: {
       username,
       password: '',
       terms: false
-    }
+    },
+    validators: {
+      onChange: applyEffectSchema(registerValidation)
+    },
+    onSubmit: handleAction(action)
   });
 
-  const usernameValue = useWatch({ name: 'username', control: form.control });
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit((values: RegisterValidation) => mutate(values))}>
-        <FormField
-          control={form.control}
-          name='username'
-          render={({ field }) => (
-            <FormItem className='mb-4'>
-              <FormLabel>Adresse électronique ou numéro de téléphone portable</FormLabel>
-              <EmailField field={{ ...field, disabled: isPending }} />
-              <FormMessage />
-            </FormItem>
+    <form.AppForm>
+      <form {...formProps(action)(form)}>
+        <form.AppField name='username'>
+          {(field) => (
+            <field.Item>
+              <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
+              <field.Input isPending={isPending} scale='input-lg' left={<RiMailLine className='opacity-40' />} />
+              <field.Info />
+            </field.Item>
           )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem className='mb-4'>
-              <FormLabel>Mot de passe</FormLabel>
-              <PasswordField field={{ ...field, disabled: isPending }} />
-              <FormDescription>Doit contenir minuscule, majuscule, chiffre et caractère spécial</FormDescription>
-              <FormMessage />
-            </FormItem>
+        </form.AppField>
+        <form.AppField name='password'>
+          {(field) => (
+            <field.Item>
+              <field.Label>Mot de passe</field.Label>
+              <ToggleState>
+                {(isActive: boolean, toggleActive: () => void) => (
+                  <field.Input
+                    type={isActive ? 'text' : 'password'}
+                    isPending={isPending}
+                    scale='input-lg'
+                    left={<RiLockLine className='opacity-40' />}
+                    right={
+                      <Button type='button' className='px-1' kind='btn-link' onClick={toggleActive}>
+                        {isActive ? <RiEyeOffLine size='20' /> : <RiEyeLine size='20' />}
+                      </Button>
+                    }
+                  />
+                )}
+              </ToggleState>
+              <p className='text-muted mt-3 text-xs'>Doit contenir minuscule, majuscule, chiffre et caractère spécial</p>
+              <field.Info />
+            </field.Item>
           )}
-        />
-        <FormField
-          name='terms'
-          render={({ field }) => (
-            <FormItem className='mb-4'>
-              <div className='flex items-center space-x-2'>
-                <FormControl>
-                  <Checkbox checked={field.value} disabled={isPending} onCheckedChange={field.onChange} />
-                </FormControl>
-                <FormLabel>
-                  J’accepte les <Link href='/terms'>conditions d’utilisation</Link>
-                </FormLabel>
-              </div>
-              <FormMessage className='block' />
-            </FormItem>
+        </form.AppField>
+        <form.AppField name='terms'>
+          {(field) => (
+            <field.Item>
+              <field.Checkbox isPending={isPending}>
+                J’accepte les
+                <Link href='/terms' target='_blank'>
+                  conditions d’utilisation
+                </Link>
+              </field.Checkbox>
+              <field.Info />
+            </field.Item>
           )}
-        />
-        <Button className='mt-12 w-full p-6 text-lg' type='submit' disabled={isPending}>
-          <Loading isLoading={isPending}>Créer mon compte</Loading>
-        </Button>
+        </form.AppField>
+        <form.Submit isPending={isPending} scale='btn-lg' modifier='btn-block' className='mt-12'>
+          Créer mon compte{' '}
+        </form.Submit>
       </form>
       <p className='mt-12 text-center'>
         Vous avez déjà un compte&nbsp;?&ensp;
-        <Link
-          href={{
-            pathname: '/login',
-            query: usernameValue.length > 0 ? { username: usernameValue } : {}
-          }}>
+        <form.QueryLink pathname='/login' queryParam='username'>
           Connectez-vous
-        </Link>
+        </form.QueryLink>
       </p>
-    </Form>
+    </form.AppForm>
   );
 };

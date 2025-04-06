@@ -1,5 +1,5 @@
-import { ComponentProps } from 'react';
-import { Button, ButtonClass } from './button';
+import type { ComponentProps } from 'react';
+import { Button, type ButtonClass } from './button';
 import { Loading } from './loading';
 
 export type LoadingButtonProps = ComponentProps<'button'> & ButtonClass & { isLoading: boolean };
