@@ -20,7 +20,7 @@ const Input = ({ className, type, color, kind, scale, left, right, ...props }: I
     <input type={type} className={cn('input', color, kind, scale, className)} {...props} />
   ) : (
     <>
-      <span className={cn('input', color, kind, scale, className)} tabIndex={-1}>
+      <span className={cn('input bg-input', color, kind, scale, className)} tabIndex={-1}>
         {left}
         <input type={type} {...props} />
         {right}
