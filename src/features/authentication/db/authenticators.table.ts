@@ -6,16 +6,16 @@ const AUTHENTICATOR_TABLE = 'authenticator';
 export const authenticatorsTable = pgTable(
   AUTHENTICATOR_TABLE,
   {
-    credentialID: uuid('credentialID').notNull().unique(),
-    userId: uuid('userId')
+    credentialID: uuid().notNull().unique(),
+    userId: uuid()
       .notNull()
       .references(() => usersTable.id, { onDelete: 'cascade' }),
-    providerAccountId: text('providerAccountId').notNull(),
-    credentialPublicKey: text('credentialPublicKey').notNull(),
-    counter: integer('counter').notNull(),
-    credentialDeviceType: text('credentialDeviceType').notNull(),
-    credentialBackedUp: boolean('credentialBackedUp').notNull(),
-    transports: text('transports')
+    providerAccountId: text().notNull(),
+    credentialPublicKey: text().notNull(),
+    counter: integer().notNull(),
+    credentialDeviceType: text().notNull(),
+    credentialBackedUp: boolean().notNull(),
+    transports: text()
   },
   (authenticator) => [
     primaryKey({

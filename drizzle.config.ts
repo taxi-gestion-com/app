@@ -6,5 +6,6 @@ export default defineConfig({
   out: './src/db/migrations',
   schema: './src/features/**/db/*.table.ts',
   dialect: 'postgresql',
+  casing: 'snake_case',
   dbCredentials: { url: DATABASE_URL }
 });
