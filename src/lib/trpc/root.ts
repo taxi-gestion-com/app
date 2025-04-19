@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { initTRPC } from '@trpc/server';
 import { experimental_nextAppDirCaller } from '@trpc/server/adapters/next-app-dir';
-import { db } from '@/db';
+import { db } from '@/lib/drizzle';
 
 const createContextInner = async () => ({
   db,
