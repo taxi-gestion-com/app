@@ -2,8 +2,8 @@
 
 import { eq } from 'drizzle-orm';
 import { Schema } from 'effect';
-import { db } from '@/db';
 import { usersTable } from '@/features/authentication';
+import { db } from '@/lib/drizzle';
 import { publicProcedure } from '@/lib/trpc';
 
 const validation = Schema.Struct({
