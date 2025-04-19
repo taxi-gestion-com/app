@@ -1,7 +1,5 @@
-import { Schema } from 'effect';
+import { minLength, Struct, String } from 'effect/Schema';
 
-export const forgotPasswordValidation = Schema.Struct({
-  username: Schema.String.pipe(
-    Schema.minLength(1, { message: () => 'Saisissez votre adresse électronique ou numéro de téléphone portable' })
-  )
+export const forgotPasswordValidation = Struct({
+  username: String.pipe(minLength(1, { message: () => 'Saisissez votre adresse électronique ou numéro de téléphone portable' }))
 });
