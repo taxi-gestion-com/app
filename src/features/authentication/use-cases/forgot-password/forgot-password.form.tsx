@@ -2,11 +2,12 @@
 
 import { RiMailLine } from 'react-icons/ri';
 import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/lib/react-form';
-import { forgotPasswordMutation } from './forgot-password.mutation';
+import { inject } from '@/lib/piqure';
+import { FORGOT_PASSWORD_KEY } from './forgot-password.key';
 import { forgotPasswordValidation } from './forgot-password.validation';
 
 export const ForgotPasswordForm = ({ username }: { username: string }) => {
-  const [action, isPending] = useAction(forgotPasswordMutation);
+  const [action, isPending] = useAction(inject(FORGOT_PASSWORD_KEY));
 
   const form = useAppForm({
     defaultValues: {

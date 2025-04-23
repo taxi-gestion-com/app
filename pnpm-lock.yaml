@@ -43,6 +43,9 @@ importers:
       pg:
         specifier: ^8.14.1
         version: 8.14.1
+      piqure:
+        specifier: ^2.1.1
+        version: 2.1.1
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -3549,6 +3552,9 @@ packages:
     resolution: { integrity: sha512-eG2dWTVw5bzqGRztnHExczNxt5VGsE6OwTeCG3fdUf9KBsZzO3R5OIIIzWR+iZA0NtZ+RDVdaoE2dK1cn6jH4g== }
     engines: { node: '>=0.10' }
     hasBin: true
+
+  piqure@2.1.1:
+    resolution: { integrity: sha512-PBrZj/zL10Sc8zO+0uzQnRLYQyDSj9y4lA+XnADMdbYo5PoqSpigXDVFydxkcZ1prPXvAdu6STj/cRdhKECkNA== }
 
   possible-typed-array-names@1.1.0:
     resolution: { integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg== }
@@ -7586,6 +7592,8 @@ snapshots:
   picomatch@4.0.2: {}
 
   pidtree@0.6.0: {}
+
+  piqure@2.1.1: {}
 
   possible-typed-array-names@1.1.0: {}
 

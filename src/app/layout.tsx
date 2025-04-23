@@ -9,6 +9,7 @@ import { type Category, type FooterLink, Footer, FooterLegal, FooterSocialLinks 
 import { ThemeProvider } from '@/lib/ui/theme/providers';
 import { ThemeChanger } from '@/lib/ui/elements/theme-changer';
 import { ReactQueryProvider } from '@/lib/react-query';
+import { PipeProviders } from '@/lib/providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -57,6 +58,14 @@ const socialLinks: FooterLink[] = [
   }
 ];
 
+const withReactQuery = (children: ReactNode) => <ReactQueryProvider>{children}</ReactQueryProvider>;
+
+const withTheme = (children: ReactNode) => (
+  <ThemeProvider attribute='data-theme' defaultTheme='dark' enableSystem disableTransitionOnChange>
+    {children}
+  </ThemeProvider>
+);
+
 const RootLayout = ({
   children
 }: Readonly<{
@@ -64,24 +73,22 @@ const RootLayout = ({
 }>) => (
   <html lang='en' suppressHydrationWarning data-theme='light'>
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <ReactQueryProvider>
-        <ThemeProvider attribute='data-theme' defaultTheme='dark' enableSystem disableTransitionOnChange>
-          {children}
-          <div className='border-base-300 text-muted border-t border-solid'>
-            <Footer className='bg-base-200' categories={footerCategories}>
-              <Logo color='color-base-500' className='max-w-80 pb-4' />
-              <ThemeChanger />
-            </Footer>
-            <FooterLegal
-              className='bg-base-300'
-              company='Red Green Refactor'
-              privacyPolicyLink='/privacy'
-              termsOfServiceLink='/terms'>
-              <FooterSocialLinks links={socialLinks}></FooterSocialLinks>
-            </FooterLegal>
-          </div>
-        </ThemeProvider>
-      </ReactQueryProvider>
+      <PipeProviders providers={[withReactQuery, withTheme]}>
+        {children}
+        <div className='border-base-300 text-muted border-t border-solid'>
+          <Footer className='bg-base-200' categories={footerCategories}>
+            <Logo color='color-base-500' className='max-w-80 pb-4' />
+            <ThemeChanger />
+          </Footer>
+          <FooterLegal
+            className='bg-base-300'
+            company='Red Green Refactor'
+            privacyPolicyLink='/privacy'
+            termsOfServiceLink='/terms'>
+            <FooterSocialLinks links={socialLinks}></FooterSocialLinks>
+          </FooterLegal>
+        </div>
+      </PipeProviders>
     </body>
   </html>
 );

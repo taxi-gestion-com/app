@@ -5,11 +5,12 @@ import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } fro
 import { Button } from '@/lib/ui/elements/button';
 import { ToggleState } from '@/lib/ui/elements/toggle-state';
 import { Link } from '@/lib/ui/elements/link';
-import { registerMutation } from './register.mutation';
+import { inject } from '@/lib/piqure';
+import { REGISTER_KEY } from './register.key';
 import { registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
-  const [action, isPending] = useAction(registerMutation);
+  const [action, isPending] = useAction(inject(REGISTER_KEY));
 
   const form = useAppForm({
     defaultValues: {

@@ -6,3 +6,5 @@ export const loginValidation = Struct({
   ),
   password: String.pipe(minLength(1, { message: () => 'Saisissez le mot de passe de votre compte' }))
 });
+
+export type LoginValidation = typeof loginValidation.Type;
