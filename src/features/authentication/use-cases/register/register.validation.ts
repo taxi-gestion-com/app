@@ -26,3 +26,5 @@ export const registerValidation = Struct({
   ),
   terms: Boolean.pipe(filter((isAccepted) => isAccepted || 'Vous devez accepter les conditions d’utilisation'))
 });
+
+export type RegisterValidation = typeof registerValidation.Type;

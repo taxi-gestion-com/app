@@ -4,11 +4,12 @@ import { RiEyeLine, RiEyeOffLine, RiMailLine, RiLockLine } from 'react-icons/ri'
 import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/lib/react-form';
 import { Button } from '@/lib/ui/elements/button';
 import { ToggleState } from '@/lib/ui/elements/toggle-state';
-import { loginMutation } from './login.mutation';
+import { inject } from '@/lib/piqure';
+import { LOGIN_KEY } from './login.key';
 import { loginValidation } from './login.validation';
 
 export const LoginForm = ({ username }: { username: string }) => {
-  const [action, isPending] = useAction(loginMutation);
+  const [action, isPending] = useAction(inject(LOGIN_KEY));
 
   const form = useAppForm({
     defaultValues: {
