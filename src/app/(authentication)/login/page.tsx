@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { LOGIN_KEY, loginMutation, LoginPage } from '@/features/authentication/use-cases/login';
 import { appPageTitle } from '@/features/web';
-import { ClientProvider } from '@/lib/piqure';
+import { ClientProvider } from '@/libraries/piqure';
 
 export const metadata: Metadata = {
   title: appPageTitle('Connexion')

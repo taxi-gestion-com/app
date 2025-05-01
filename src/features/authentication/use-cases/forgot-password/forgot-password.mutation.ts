@@ -1,7 +1,7 @@
 'use server';
 
 import { Schema } from 'effect';
-import { publicProcedure } from '@/lib/trpc';
+import { publicProcedure } from '@/libraries/trpc';
 import { forgotPasswordValidation } from './forgot-password.validation';
 
 export const forgotPasswordMutation = publicProcedure

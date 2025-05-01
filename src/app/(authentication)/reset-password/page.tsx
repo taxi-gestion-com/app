@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { ResetPasswordPage } from '@/features/authentication';
+import { ResetPasswordPage } from '@/features/authentication/use-cases/reset-password';
 import { appPageTitle } from '@/features/web';
 
 export const metadata: Metadata = {

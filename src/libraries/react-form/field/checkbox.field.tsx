@@ -1,4 +1,4 @@
-import { Checkbox as CheckboxBase, type CheckboxProps as CheckboxBaseProps } from '@/lib/ui/elements/checkbox';
+import { Checkbox as CheckboxBase, type CheckboxProps as CheckboxBaseProps } from '@/libraries/ui/elements/checkbox';
 import { useFieldContext } from '../form-context';
 import { Label } from './label.field';
 

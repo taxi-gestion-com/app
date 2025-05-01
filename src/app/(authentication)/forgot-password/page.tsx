@@ -6,7 +6,7 @@ import {
   ForgotPasswordPage
 } from '@/features/authentication/use-cases/forgot-password';
 import { appPageTitle } from '@/features/web';
-import { ClientProvider } from '@/lib/piqure';
+import { ClientProvider } from '@/libraries/piqure';
 
 export const metadata: Metadata = {
   title: appPageTitle('Mot de passe oublié')

@@ -3,7 +3,7 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
-import { LayoutTransition } from '@/lib/ui/animations';
+import { LayoutTransition } from '@/libraries/ui/animations';
 import { City, Logo } from '@/features/brand';
 
 const Layout = ({

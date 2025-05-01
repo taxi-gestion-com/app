@@ -1,5 +1,5 @@
-import { ButtonClass, ButtonProps } from '@/lib/ui/elements/button';
-import { LoadingButton } from '@/lib/ui/elements/loading-button';
+import { ButtonClass, ButtonProps } from '@/libraries/ui/elements/button';
+import { LoadingButton } from '@/libraries/ui/elements/loading-button';
 
 const buttonClass: ButtonClass = { color: 'btn-primary' };
 

@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/libraries/utils';
 import type { Color } from './color';
 import type { Scale } from './scale';
 

@@ -1,10 +1,10 @@
 'use client';
 
 import { RiEyeLine, RiEyeOffLine, RiMailLine, RiLockLine } from 'react-icons/ri';
-import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/lib/react-form';
-import { Button } from '@/lib/ui/elements/button';
-import { ToggleState } from '@/lib/ui/elements/toggle-state';
-import { inject } from '@/lib/piqure';
+import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/libraries/react-form';
+import { Button } from '@/libraries/ui/elements/button';
+import { ToggleState } from '@/libraries/ui/elements/toggle-state';
+import { inject } from '@/libraries/piqure';
 import { LOGIN_KEY } from './login.key';
 import { loginValidation } from './login.validation';
 
