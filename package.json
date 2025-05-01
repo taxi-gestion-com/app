@@ -12,10 +12,10 @@
     "prettier": "prettier --write ./src/",
     "prettier.ci": "prettier --check ./src/",
     "prepare": "husky",
-    "drizzle:generate": "drizzle-kit generate --config src/lib/drizzle/config.ts",
-    "drizzle:migrate": "drizzle-kit migrate --config src/lib/drizzle/config.ts",
-    "drizzle:check": "drizzle-kit check --config src/lib/drizzle/config.ts",
-    "drizzle:studio": "drizzle-kit studio --config src/lib/drizzle/config.ts"
+    "drizzle:generate": "drizzle-kit generate --config src/libraries/drizzle/config.ts",
+    "drizzle:migrate": "drizzle-kit migrate --config src/libraries/drizzle/config.ts",
+    "drizzle:check": "drizzle-kit check --config src/libraries/drizzle/config.ts",
+    "drizzle:studio": "drizzle-kit studio --config src/libraries/drizzle/config.ts"
   },
   "dependencies": {
     "@tanstack/react-form": "^1.9.0",

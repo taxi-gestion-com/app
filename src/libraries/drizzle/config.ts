@@ -3,7 +3,7 @@ import { defineConfig } from 'drizzle-kit';
 import { DATABASE_URL } from '@/settings';
 
 export default defineConfig({
-  out: './src/lib/drizzle/migrations',
+  out: './src/libraries/drizzle/migrations',
   schema: './src/features/**/db/*.table.ts',
   dialect: 'postgresql',
   casing: 'snake_case',
