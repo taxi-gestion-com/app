@@ -1,8 +1,8 @@
 'use client';
 
 import { RiMailLine } from 'react-icons/ri';
-import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/lib/react-form';
-import { inject } from '@/lib/piqure';
+import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/libraries/react-form';
+import { inject } from '@/libraries/piqure';
 import { FORGOT_PASSWORD_KEY } from './forgot-password.key';
 import { forgotPasswordValidation } from './forgot-password.validation';
 

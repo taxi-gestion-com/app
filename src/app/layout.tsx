@@ -5,11 +5,11 @@ import { RiGithubFill, RiTwitterXFill } from 'react-icons/ri';
 import '@/styles/globals.css';
 import { appPageTitle } from '@/features/web';
 import { Logo } from '@/features/brand';
-import { type Category, type FooterLink, Footer, FooterLegal, FooterSocialLinks } from '@/lib/ui/blocks/footer';
-import { ThemeProvider } from '@/lib/ui/theme/providers';
-import { ThemeChanger } from '@/lib/ui/elements/theme-changer';
-import { ReactQueryProvider } from '@/lib/react-query';
-import { PipeProviders } from '@/lib/providers';
+import { type Category, type FooterLink, Footer, FooterLegal, FooterSocialLinks } from '@/libraries/ui/blocks/footer';
+import { ThemeProvider } from '@/libraries/ui/theme/providers';
+import { ThemeChanger } from '@/libraries/ui/elements/theme-changer';
+import { ReactQueryProvider } from '@/libraries/react-query';
+import { PipeProviders } from '@/libraries/providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

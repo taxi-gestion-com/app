@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/libraries/utils';
 
 export const City = ({ className, children }: { className?: string; children?: ReactNode }): ReactNode => (
   <>

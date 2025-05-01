@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
-import { ClientProvider } from '@/lib/piqure';
+import { ClientProvider } from '@/libraries/piqure';
 import { REGISTER_KEY, registerMutation, RegisterPage } from '@/features/authentication/use-cases/register';
 import { appPageTitle } from '@/features/web';
 

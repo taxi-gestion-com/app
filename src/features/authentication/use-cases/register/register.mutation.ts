@@ -1,7 +1,7 @@
 'use server';
 
 import { Schema } from 'effect';
-import { publicProcedure } from '@/lib/trpc';
+import { publicProcedure } from '@/libraries/trpc';
 import { registerValidation } from './register.validation';
 
 export const registerMutation = publicProcedure

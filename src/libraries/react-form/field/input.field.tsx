@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import { Input as InputBase, type InputProps as InputBaseProps } from '@/lib/ui/elements/input';
+import { cn } from '@/libraries/utils';
+import { Input as InputBase, type InputProps as InputBaseProps } from '@/libraries/ui/elements/input';
 import { useFieldContext } from '../form-context';
 
 type InputProps = Omit<InputBaseProps, 'name'> & {

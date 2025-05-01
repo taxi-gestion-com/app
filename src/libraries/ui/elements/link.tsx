@@ -1,6 +1,6 @@
 import type { HTMLAttributeAnchorTarget, HTMLAttributes, ReactNode } from 'react';
 import NextLink, { type LinkProps as NextLinkProps } from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn } from '@/libraries/utils';
 import type { Color } from './color';
 
 export type LinkClass<Prefix extends `${string}link` = 'link'> = {
