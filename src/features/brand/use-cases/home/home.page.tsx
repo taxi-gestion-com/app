@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ButtonLink } from '@/libraries/ui/elements/button-link';
+import { ButtonLink } from '@/libraries/ui/primitives/button-link';
 import { City, Logo } from '../illustrations';
 
 export const HomePage = (): ReactNode => (

@@ -7,7 +7,7 @@ import { appPageTitle } from '@/features/web';
 import { Logo } from '@/features/brand';
 import { type Category, type FooterLink, Footer, FooterLegal, FooterSocialLinks } from '@/libraries/ui/blocks/footer';
 import { ThemeProvider } from '@/libraries/ui/theme/providers';
-import { ThemeChanger } from '@/libraries/ui/elements/theme-changer';
+import { ThemeChanger } from '@/libraries/ui/primitives/theme-changer';
 import { ReactQueryProvider } from '@/libraries/react-query';
 import { PipeProviders } from '@/libraries/providers';
 

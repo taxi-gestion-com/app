@@ -33,7 +33,7 @@
   --color-primary: oklch(0.5 0.2 260);
   --color-primary-subtle: oklch(0.6 0.19 260);
   --color-muted: oklch(0.5 0 17);
-  --color-input: oklch(0.99 0.01 260);
+  --color-input: oklch(0.99 0 260);
 }
 
 @plugin "daisyui/theme" {

@@ -1,10 +1,10 @@
 'use client';
 
 import { RiEyeLine, RiEyeOffLine, RiLockLine, RiMailLine } from 'react-icons/ri';
-import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/libraries/react-form';
-import { Button } from '@/libraries/ui/elements/button';
-import { ToggleState } from '@/libraries/ui/elements/toggle-state';
-import { Link } from '@/libraries/ui/elements/link';
+import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/react-form';
+import { Button } from '@/libraries/ui/primitives/button';
+import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
+import { Link } from '@/libraries/ui/primitives/link';
 import { inject } from '@/libraries/piqure';
 import { REGISTER_KEY } from './register.key';
 import { registerValidation } from './register.validation';
@@ -26,7 +26,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
 
   return (
     <form.AppForm>
-      <form {...formProps(action)(form)}>
+      <form onSubmit={handleSubmit(form)}>
         <form.AppField name='username'>
           {(field) => (
             <field.Item>

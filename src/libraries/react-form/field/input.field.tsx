@@ -1,15 +1,17 @@
 import { cn } from '@/libraries/utils';
-import { Input as InputBase, type InputProps as InputBaseProps } from '@/libraries/ui/elements/input';
+import { Input as InputBase, type InputProps as InputBaseProps } from '@/libraries/ui/primitives/input';
 import { useFieldContext } from '../form-context';
+import { hasError } from './has-error';
 
 type InputProps = Omit<InputBaseProps, 'name'> & {
   isPending: boolean;
+  isConnected?: boolean;
 };
 
-export const Input = ({ className, type = 'text', isPending, ...props }: InputProps) => {
+export const Input = ({ className = 'w-full', type = 'text', isPending, isConnected = true, ...props }: InputProps) => {
   const { name, state, handleBlur, handleChange } = useFieldContext<string>();
 
-  return (
+  return isConnected ? (
     <InputBase
       id={name}
       name={name}
@@ -18,11 +20,14 @@ export const Input = ({ className, type = 'text', isPending, ...props }: InputPr
       disabled={isPending ?? props.disabled}
       onBlur={handleBlur}
       onChange={(e) => handleChange(e.target.value)}
-      className={cn(
-        'w-full',
-        (state.meta.isBlurred || state.meta.isTouched) && state.meta.errors.length > 0 && 'input-error',
-        className
-      )}
+      className={cn(hasError(state) && 'input-error', className)}
+      {...props}
+    />
+  ) : (
+    <InputBase
+      type={type}
+      disabled={isPending ?? props.disabled}
+      className={cn('w-full', hasError(state) && 'input-error', className)}
       {...props}
     />
   );

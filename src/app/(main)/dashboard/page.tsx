@@ -6,4 +6,6 @@ export const metadata: Metadata = {
   title: appPageTitle('Tableau de bord')
 };
 
-export default DashboardPage;
+const Page = async () => <DashboardPage />;
+
+export default Page;
