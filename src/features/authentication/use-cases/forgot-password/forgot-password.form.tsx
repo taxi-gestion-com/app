@@ -1,7 +1,7 @@
 'use client';
 
 import { RiMailLine } from 'react-icons/ri';
-import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/libraries/react-form';
+import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/react-form';
 import { inject } from '@/libraries/piqure';
 import { FORGOT_PASSWORD_KEY } from './forgot-password.key';
 import { forgotPasswordValidation } from './forgot-password.validation';
@@ -21,7 +21,7 @@ export const ForgotPasswordForm = ({ username }: { username: string }) => {
 
   return (
     <form.AppForm>
-      <form {...formProps(action)(form)}>
+      <form onSubmit={handleSubmit(form)}>
         <form.AppField name='username'>
           {(field) => (
             <field.Item>

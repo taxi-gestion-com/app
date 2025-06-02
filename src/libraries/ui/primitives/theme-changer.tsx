@@ -1,8 +1,8 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { useTheme } from 'next-themes';
 import { RiComputerLine, RiMoonClearLine, RiSunLine } from 'react-icons/ri';
+import { useTheme } from 'next-themes';
 
 const Theme = ({
   label,

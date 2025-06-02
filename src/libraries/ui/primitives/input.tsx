@@ -17,7 +17,7 @@ export type InputProps = ComponentProps<'input'> &
 
 const Input = ({ className, type, color, kind, scale, left, right, ...props }: InputProps) =>
   left == null && right == null ? (
-    <input type={type} className={cn('input', color, kind, scale, className)} {...props} />
+    <input type={type} className={cn('input bg-input', color, kind, scale, className)} {...props} />
   ) : (
     <>
       <span className={cn('input bg-input', color, kind, scale, className)} tabIndex={-1}>

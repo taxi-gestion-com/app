@@ -1,9 +1,9 @@
 'use client';
 
 import { RiEyeLine, RiEyeOffLine, RiMailLine, RiLockLine } from 'react-icons/ri';
-import { applyEffectSchema, formProps, handleAction, useAction, useAppForm } from '@/libraries/react-form';
-import { Button } from '@/libraries/ui/elements/button';
-import { ToggleState } from '@/libraries/ui/elements/toggle-state';
+import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/react-form';
+import { Button } from '@/libraries/ui/primitives/button';
+import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
 import { inject } from '@/libraries/piqure';
 import { LOGIN_KEY } from './login.key';
 import { loginValidation } from './login.validation';
@@ -24,7 +24,7 @@ export const LoginForm = ({ username }: { username: string }) => {
 
   return (
     <form.AppForm>
-      <form {...formProps(action)(form)}>
+      <form onSubmit={handleSubmit(form)}>
         <form.AppField name='username'>
           {(field) => (
             <field.Item>

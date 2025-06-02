@@ -2,13 +2,25 @@ import { Either, ParseResult, Schema } from 'effect';
 import { Left, Right } from 'effect/Either';
 import { type ArrayFormatterIssue, ParseError } from 'effect/ParseResult';
 
-type StandardErrors = Record<string, { message: ArrayFormatterIssue['message']; type: ArrayFormatterIssue['_tag'] }>;
+type StandardErrors = Record<string, { message: ArrayFormatterIssue['message']; type: ArrayFormatterIssue['_tag'] }[]>;
 
 const EMPTY_ERRORS: StandardErrors = {};
 
-const toStandardError = (errors: StandardErrors, { path, message, _tag: type }: ArrayFormatterIssue): StandardErrors => ({
+const errorKeyAt =
+  (index: number) =>
+  (path: readonly PropertyKey[]): string =>
+    path.slice(0, index + 1).join('.');
+
+const errorsIn =
+  ({ path, message, _tag: type }: ArrayFormatterIssue) =>
+  (error: StandardErrors, _: unknown, index: number): StandardErrors => ({
+    ...error,
+    [errorKeyAt(index)(path)]: [{ message, type }]
+  });
+
+const toStandardError = (errors: StandardErrors, arrayFormatterIssue: ArrayFormatterIssue): StandardErrors => ({
   ...errors,
-  [path.join('.')]: { message, type }
+  ...arrayFormatterIssue.path.reduce(errorsIn(arrayFormatterIssue), {})
 });
 
 const toStandardErrors = (errors: ArrayFormatterIssue[]): StandardErrors => errors.reduce(toStandardError, EMPTY_ERRORS);

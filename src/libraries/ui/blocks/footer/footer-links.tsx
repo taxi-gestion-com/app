@@ -1,4 +1,4 @@
-import { Link, type LinkProps } from '@/libraries/ui/elements/link';
+import { Link, type LinkProps } from '@/libraries/ui/primitives/link';
 
 export type FooterLink = {
   key: string;
