@@ -10,9 +10,9 @@ const Info = lazy(() => import('./field/info.field').then((module) => ({ default
 const Checkbox = lazy(() => import('./field/checkbox.field').then((module) => ({ default: module.Checkbox })));
 const Combobox = lazy(() => import('./field/combobox.field').then((module) => ({ default: module.ComboBox }))) as <
   TItem,
-  TField
+  TPayload extends object
 >(
-  props: ComboBoxProps<TItem, TField>
+  props: ComboBoxProps<TItem, TPayload>
 ) => ReactNode;
 const SelectedItems = lazy(() =>
   import('./field/selected-items.field').then((module) => ({ default: module.SelectedItem }))

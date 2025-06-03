@@ -3,37 +3,49 @@ import { equals } from 'effect/Equal';
 import { ComboBox as ComboBoxBase, type ComboBoxProps as ComboBoxBaseProps } from '@/libraries/ui/primitives/combobox';
 import { useFieldContext } from '@/libraries/react-form/form-context';
 
-export type ComboBoxProps<TItem, TValue> = ComboBoxBaseProps<TItem> & {
+export type ComboBoxProps<TItem, TPayload extends object> = ComboBoxBaseProps<TItem, TPayload> & {
   isPending: boolean;
-  itemToValue: (item: TItem) => TValue;
   itemToKey: (item: TItem) => string;
-  valueToKey: (value: TValue) => string;
 };
 
-const getMultipleSelection = <TValue,>(state: { value: TValue | TValue[] }): state is { value: TValue[] } =>
+const getMultipleSelection = <TItem,>(state: { value: TItem | TItem[] }): state is { value: TItem[] } =>
   Array.isArray(state.value);
 
 const alreadyExist =
-  <TValue,>({ valueToKey }: { valueToKey: (value: TValue) => string }) =>
-  (newValue: TValue) =>
-  (value: TValue): boolean =>
-    equals(valueToKey(value), valueToKey(newValue));
+  <TItem,>({ itemToKey }: { itemToKey: (value: TItem) => string }) =>
+  (newValue: TItem) =>
+  (value: TItem): boolean =>
+    equals(itemToKey(value), itemToKey(newValue));
 
-export const ComboBox = <TItem, TValue>(comboBoxProps: ComboBoxProps<TItem, TValue>) => {
-  const { name, form, state, setValue, setMeta } = useFieldContext<TValue>();
+export const ComboBox = <TItem, TPayload extends object>(comboBoxProps: ComboBoxProps<TItem, TPayload>) => {
+  const { form, name, state, setValue, setMeta } = useFieldContext<TItem>();
 
   const isMultipleSelection = getMultipleSelection(state);
-  const defaultValue: TValue = form.options.defaultValues[name];
+  const defaultValue: TItem = form.options.defaultValues[name];
 
-  const appendValue = (item: TItem, values: TValue[]): void => {
-    const value: TValue = comboBoxProps.itemToValue(item);
+  const appendValue = (value: TItem, values: TItem[]): void => {
     if (values.some(alreadyExist(comboBoxProps)(value))) return;
-    setValue([...values, value] as TValue);
+    setValue([...values, value] as TItem);
   };
 
   return (
-    <ComboBoxBase {...comboBoxProps} clearOnSelect={isMultipleSelection}>
-      {({ getLabelProps, getInputProps, getMenuProps, getItemProps, isOpen, selectedItem, highlightedItem, items, setItems }) =>
+    <ComboBoxBase
+      {...comboBoxProps}
+      clearOnSelect={isMultipleSelection}
+      defaultValue={defaultValue}
+      selectedValue={state.value}>
+      {({
+        getLabelProps,
+        getInputProps,
+        getMenuProps,
+        getItemProps,
+        isOpen,
+        selectedItem,
+        highlightedItem,
+        items,
+        setItems,
+        payload
+      }) =>
         comboBoxProps.children({
           getLabelProps,
           getMenuProps,
@@ -42,12 +54,12 @@ export const ComboBox = <TItem, TValue>(comboBoxProps: ComboBoxProps<TItem, TVal
               isConnected: false,
               disabled: comboBoxProps.isPending,
               onFocusCapture: () => {
-                if (isMultipleSelection || !equals(state.value, defaultValue)) return;
-                setValue(defaultValue);
+                if (isMultipleSelection || comboBoxProps.itemToString(state.value) !== '') return;
+                setValue(null as TItem);
               },
               onInput: () => {
                 if (isMultipleSelection) return;
-                setValue(defaultValue);
+                setValue(null as TItem);
               },
               onBlur: () => {
                 setMeta({ ...state.meta, isBlurred: true });
@@ -55,25 +67,21 @@ export const ComboBox = <TItem, TValue>(comboBoxProps: ComboBoxProps<TItem, TVal
               },
               onKeyDown: (e: KeyboardEvent<HTMLInputElement>): void => {
                 if (e.key !== 'Enter' || highlightedItem == null) return;
-                return isMultipleSelection
-                  ? appendValue(highlightedItem, state.value)
-                  : setValue(comboBoxProps.itemToValue(highlightedItem));
+                return isMultipleSelection ? appendValue(highlightedItem, state.value) : setValue(highlightedItem);
               },
               ...options
             }),
           getItemProps: (options) =>
             getItemProps({
-              onClick: () =>
-                isMultipleSelection
-                  ? appendValue(options.item, state.value)
-                  : setValue(comboBoxProps.itemToValue(options.item)),
+              onClick: () => (isMultipleSelection ? appendValue(options.item, state.value) : setValue(options.item)),
               ...options
             }),
           isOpen,
           highlightedItem,
           selectedItem,
           items,
-          setItems
+          setItems,
+          payload
         })
       }
     </ComboBoxBase>
