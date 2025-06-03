@@ -5,25 +5,25 @@ import { Badge } from '@/libraries/ui/primitives/badge';
 
 export type SelectedItemProps<T> = {
   values: T[];
-  valueToKey: (value: T) => string;
-  valueToString: (value: T) => string;
+  itemToKey: (value: T) => string;
+  itemToString: (value: T) => string;
   onClick?: (value: T) => () => void;
   className?: string;
 };
 
-export const SelectedItem = <T,>({ values, valueToString, valueToKey, onClick, className }: SelectedItemProps<T>) =>
+export const SelectedItem = <T,>({ values, itemToString, itemToKey, onClick, className }: SelectedItemProps<T>) =>
   values.length > 0 && (
     <ul className={className}>
       {values.map(
         (value: T): ReactNode => (
-          <li key={valueToKey(value)}>
+          <li key={itemToKey(value)}>
             {onClick ? (
               <Button color='btn-primary' kind='btn-soft' scale='btn-xs' type='button' onClick={onClick(value)}>
-                {valueToString(value)}
+                {itemToString(value)}
                 <RiCloseLine />
               </Button>
             ) : (
-              <Badge color='badge-primary'>{valueToString(value)}</Badge>
+              <Badge color='badge-primary'>{itemToString(value)}</Badge>
             )}
           </li>
         )
