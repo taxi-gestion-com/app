@@ -10,7 +10,7 @@ export type LoadingClass<Prefix extends `${string}loading` = 'loading'> = {
 export type LoadingProps = {
   isLoading: boolean;
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
 } & LoadingClass;
 
 export const Loading = ({ isLoading = false, className, children, style, scale }: LoadingProps) => (
