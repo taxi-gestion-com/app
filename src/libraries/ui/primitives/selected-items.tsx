@@ -3,7 +3,12 @@ import { RiCloseLine } from 'react-icons/ri';
 import { Button } from '@/libraries/ui/primitives/button';
 import { Badge } from '@/libraries/ui/primitives/badge';
 
-export type SelectedItemProps<T> = {
+export type SelectedItemsData<T> = {
+  itemToKey: (value: T) => string;
+  itemToString: (value: T) => string;
+};
+
+export type SelectedItemsProps<T> = {
   values: T[];
   itemToKey: (value: T) => string;
   itemToString: (value: T) => string;
@@ -11,7 +16,7 @@ export type SelectedItemProps<T> = {
   className?: string;
 };
 
-export const SelectedItem = <T,>({ values, itemToString, itemToKey, onClick, className }: SelectedItemProps<T>) =>
+export const SelectedItems = <T,>({ values, itemToString, itemToKey, onClick, className }: SelectedItemsProps<T>) =>
   values.length > 0 && (
     <ul className={className}>
       {values.map(

@@ -19,6 +19,7 @@ export type OptionsData<T> = {
 export const Options = <T,>({
   items,
   isOpen = false,
+  showEmpty = false,
   selectedItem,
   highlightedItem,
   getMenuProps,
@@ -29,6 +30,7 @@ export const Options = <T,>({
 }: {
   items: T[];
   isOpen?: boolean;
+  showEmpty?: boolean;
   selectedItem: T | null;
   highlightedItem: T | null;
   getMenuProps?: () => object;
@@ -38,7 +40,7 @@ export const Options = <T,>({
   <div
     className={cn(
       'menu bg-input rounded-field border-base-200 absolute z-10 mt-1.5 w-72 flex-nowrap border shadow-lg',
-      !(isOpen && items.length) && 'hidden'
+      !(isOpen && (items.length || showEmpty)) && 'hidden'
     )}>
     <ul className='max-h-50 overflow-scroll' {...getMenuProps?.()}>
       {isOpen &&

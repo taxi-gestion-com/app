@@ -1,7 +1,15 @@
-import { KeyboardEvent } from 'react';
+import { type KeyboardEvent } from 'react';
 import { equals } from 'effect/Equal';
-import { ComboBox as ComboBoxBase, type ComboBoxProps as ComboBoxBaseProps } from '@/libraries/ui/primitives/combobox';
-import { useFieldContext } from '@/libraries/react-form/form-context';
+import {
+  ComboBox as ComboBoxBase,
+  type ComboBoxProps as ComboBoxBaseProps,
+  type ComboBoxData as ComboBoxBaseData
+} from '@/libraries/ui/primitives/combobox';
+import { useFieldContext } from '../form-context';
+
+export type ComboBoxData<TItem, TPayload> = ComboBoxBaseData<TItem, TPayload> & {
+  itemToKey: (item: TItem) => string;
+};
 
 export type ComboBoxProps<TItem, TPayload extends object> = ComboBoxBaseProps<TItem, TPayload> & {
   isPending: boolean;
@@ -29,11 +37,7 @@ export const ComboBox = <TItem, TPayload extends object>(comboBoxProps: ComboBox
   };
 
   return (
-    <ComboBoxBase
-      {...comboBoxProps}
-      clearOnSelect={isMultipleSelection}
-      defaultValue={defaultValue}
-      selectedValue={state.value}>
+    <ComboBoxBase {...comboBoxProps} clearOnSelect={isMultipleSelection} defaultValue={defaultValue}>
       {({
         getLabelProps,
         getInputProps,
@@ -63,7 +67,7 @@ export const ComboBox = <TItem, TPayload extends object>(comboBoxProps: ComboBox
               },
               onBlur: () => {
                 setMeta({ ...state.meta, isBlurred: true });
-                setItems([]);
+                if (isMultipleSelection) setItems([]);
               },
               onKeyDown: (e: KeyboardEvent<HTMLInputElement>): void => {
                 if (e.key !== 'Enter' || highlightedItem == null) return;

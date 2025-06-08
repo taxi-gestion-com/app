@@ -1,7 +1,7 @@
 'use client';
 
 import { RiEyeLine, RiEyeOffLine, RiMailLine, RiLockLine } from 'react-icons/ri';
-import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/react-form';
+import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/form';
 import { Button } from '@/libraries/ui/primitives/button';
 import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
 import { inject } from '@/libraries/piqure';
@@ -27,16 +27,16 @@ export const LoginForm = ({ username }: { username: string }) => {
       <form onSubmit={handleSubmit(form)}>
         <form.AppField name='username'>
           {(field) => (
-            <field.Item>
+            <field.Group>
               <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
               <field.Input isPending={isPending} scale='input-lg' left={<RiMailLine className='opacity-40' />} />
               <field.Info />
-            </field.Item>
+            </field.Group>
           )}
         </form.AppField>
         <form.AppField name='password'>
           {(field) => (
-            <field.Item>
+            <field.Group>
               <field.Label>Mot de passe</field.Label>
               <ToggleState>
                 {(isActive: boolean, toggleActive: () => void) => (
@@ -54,7 +54,7 @@ export const LoginForm = ({ username }: { username: string }) => {
                 )}
               </ToggleState>
               <field.Info />
-            </field.Item>
+            </field.Group>
           )}
         </form.AppField>
         <div className='text-end'>

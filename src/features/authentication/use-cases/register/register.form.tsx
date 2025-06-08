@@ -1,7 +1,7 @@
 'use client';
 
 import { RiEyeLine, RiEyeOffLine, RiLockLine, RiMailLine } from 'react-icons/ri';
-import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/react-form';
+import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/form';
 import { Button } from '@/libraries/ui/primitives/button';
 import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
 import { Link } from '@/libraries/ui/primitives/link';
@@ -29,16 +29,16 @@ export const RegisterForm = ({ username }: { username: string }) => {
       <form onSubmit={handleSubmit(form)}>
         <form.AppField name='username'>
           {(field) => (
-            <field.Item>
+            <field.Group>
               <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
               <field.Input isPending={isPending} scale='input-lg' left={<RiMailLine className='opacity-40' />} />
               <field.Info />
-            </field.Item>
+            </field.Group>
           )}
         </form.AppField>
         <form.AppField name='password'>
           {(field) => (
-            <field.Item>
+            <field.Group>
               <field.Label>Mot de passe</field.Label>
               <ToggleState>
                 {(isActive: boolean, toggleActive: () => void) => (
@@ -57,12 +57,12 @@ export const RegisterForm = ({ username }: { username: string }) => {
               </ToggleState>
               <p className='text-muted mt-3 text-xs'>Doit contenir minuscule, majuscule, chiffre et caractère spécial</p>
               <field.Info />
-            </field.Item>
+            </field.Group>
           )}
         </form.AppField>
         <form.AppField name='terms'>
           {(field) => (
-            <field.Item>
+            <field.Group>
               <field.Checkbox isPending={isPending}>
                 J’accepte les
                 <Link href='/terms' target='_blank'>
@@ -70,7 +70,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
                 </Link>
               </field.Checkbox>
               <field.Info />
-            </field.Item>
+            </field.Group>
           )}
         </form.AppField>
         <form.Submit isPending={isPending} scale='btn-lg' modifier='btn-block' className='mt-12'>
