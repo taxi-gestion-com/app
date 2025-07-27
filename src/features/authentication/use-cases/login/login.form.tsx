@@ -6,15 +6,20 @@ import { Button } from '@/libraries/ui/primitives/button';
 import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
 import { inject } from '@/libraries/piqure';
 import { LOGIN_KEY } from './login.key';
-import { loginValidation } from './login.validation';
+import { LoginValidation, loginValidation } from './login.validation';
+import { ReactNode } from 'react';
+import { LoosePartial } from '@/libraries/utils';
 
-export const LoginForm = ({ username }: { username: string }) => {
+type LoginFormProps = LoosePartial<Pick<LoginValidation, 'username' | 'redirect'>>;
+
+export const LoginForm = ({ username = '', redirect }: LoginFormProps): ReactNode => {
   const [action, isPending] = useAction(inject(LOGIN_KEY));
 
   const form = useAppForm({
     defaultValues: {
       username,
-      password: ''
+      password: '',
+      redirect
     },
     validators: {
       onChange: applyEffectSchema(loginValidation)
@@ -25,6 +30,13 @@ export const LoginForm = ({ username }: { username: string }) => {
   return (
     <form.AppForm>
       <form onSubmit={handleSubmit(form)}>
+        <form.AppField name='redirect'>
+          {(field) => (
+            <field.Group>
+              <field.Input isPending={isPending} hidden />
+            </field.Group>
+          )}
+        </form.AppField>
         <form.AppField name='username'>
           {(field) => (
             <field.Group>

@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { DATABASE_URL } from '@/settings';
-import { authenticationSchema } from '@/features/authentication';
+import { authenticationSchema } from '@/libraries/better-auth/db';
 
 export const db = drizzle({
   connection: DATABASE_URL,
