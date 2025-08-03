@@ -1,7 +1,7 @@
 'use client';
 
-import { InjectionKey } from 'piqure/src/Providing';
-import { ReactNode } from 'react';
+import type { InjectionKey } from 'piqure/src/Providing';
+import type { ReactNode } from 'react';
 import { provideLazy } from './index';
 
 export const ClientProvider = <TBind, TTo extends TBind>({

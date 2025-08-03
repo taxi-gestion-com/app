@@ -1,6 +1,6 @@
-import type { HTMLAttributeAnchorTarget, HTMLAttributes, ReactNode } from 'react';
-import NextLink from 'next/link';
 import type { LinkProps as NextLinkProps } from 'next/dist/client/link';
+import NextLink from 'next/link';
+import type { HTMLAttributeAnchorTarget, HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/libraries/utils';
 import type { ButtonClass } from './button';
 
@@ -29,7 +29,8 @@ export const ButtonLink = ({
     target={target}
     rel={target === '_blank' ? 'noopener noreferrer' : undefined}
     title={iconOnly && typeof children === 'string' ? children : undefined}
-    {...props}>
+    {...props}
+  >
     {icon && icon}
     {children && !iconOnly && children}
   </NextLink>

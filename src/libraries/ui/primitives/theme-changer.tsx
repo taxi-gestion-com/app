@@ -1,8 +1,8 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import type { ReactNode } from 'react';
 import { RiComputerLine, RiMoonClearLine, RiSunLine } from 'react-icons/ri';
-import { useTheme } from 'next-themes';
 
 const Theme = ({
   label,
@@ -17,16 +17,15 @@ const Theme = ({
   icon: ReactNode;
   onClick: () => void;
 }) => (
-  <span
+  <button
+    type='button'
     suppressHydrationWarning
     className='data-checked:text-base-content data-checked:bg-base-100 data-checked:ring-base-content/20 rounded-full p-1.5 data-checked:ring sm:p-1'
-    aria-label={label}
-    role='radio'
-    aria-checked={selected === value}
-    data-checked={selected === value ? true : null}
-    onClick={onClick}>
+    aria-label={`${label}${selected === value ? ' (sélectionné)' : ''}`}
+    onClick={onClick}
+  >
     {icon}
-  </span>
+  </button>
 );
 
 const ThemeChanger = () => {

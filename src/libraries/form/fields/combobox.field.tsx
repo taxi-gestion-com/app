@@ -1,9 +1,9 @@
-import { type KeyboardEvent } from 'react';
 import { equals } from 'effect/Equal';
+import type { KeyboardEvent } from 'react';
 import {
   ComboBox as ComboBoxBase,
-  type ComboBoxProps as ComboBoxBaseProps,
-  type ComboBoxData as ComboBoxBaseData
+  type ComboBoxData as ComboBoxBaseData,
+  type ComboBoxProps as ComboBoxBaseProps
 } from '@/libraries/ui/primitives/combobox';
 import { useFieldContext } from '../form-context';
 
@@ -69,7 +69,7 @@ export const ComboBox = <TItem, TPayload extends object>(comboBoxProps: ComboBox
                 setMeta({ ...state.meta, isBlurred: true });
                 if (isMultipleSelection) setItems([]);
               },
-              onKeyDown: (e: KeyboardEvent<HTMLInputElement>): void => {
+              onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
                 if (e.key !== 'Enter' || highlightedItem == null) return;
                 return isMultipleSelection ? appendValue(highlightedItem, state.value) : setValue(highlightedItem);
               },

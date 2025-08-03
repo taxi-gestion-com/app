@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 
 type ToggleStateProps = {
   children: (isActive: boolean, toggleActive: () => void) => ReactNode;

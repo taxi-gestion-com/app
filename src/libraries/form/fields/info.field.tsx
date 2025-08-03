@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { hasError } from './has-error';
+import type { ReactNode } from 'react';
 import { useFieldContext } from '../form-context';
+import { hasError } from './has-error';
 
 const hasExactlyOne = <T,>(items: T[]): items is [T] => items.length === 1;
 

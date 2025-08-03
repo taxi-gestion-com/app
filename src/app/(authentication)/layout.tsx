@@ -1,18 +1,18 @@
 'use client';
 
-import { ReactNode } from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
+import type { ReactNode } from 'react';
+import { CityIllustration, Logo } from '@/features/brand';
 import { LayoutTransition } from '@/libraries/ui/animations';
-import { City, Logo } from '@/features/brand';
 
 const Layout = ({
   children
 }: Readonly<{
   children: ReactNode;
 }>): ReactNode => {
-  const pathname = useSelectedLayoutSegment();
-  const isLoginRoute = pathname === 'login';
+  const pathname: string | null = useSelectedLayoutSegment();
+  const isLeftSlideDirection: boolean = ['login', 'activate'].includes(pathname ?? '');
 
   return (
     <div className='flex h-screen'>
@@ -22,17 +22,18 @@ const Layout = ({
         </Link>
         <div className='my-auto'>
           <LayoutTransition
-            initial={{ opacity: 0, x: isLoginRoute ? '-50%' : '50%' }}
+            initial={{ opacity: 0, x: isLeftSlideDirection ? '-50%' : '50%' }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: isLoginRoute ? '-50%' : '50%' }}
-            transition={{ duration: 0.15 }}>
+            exit={{ opacity: 0, x: isLeftSlideDirection ? '-50%' : '50%' }}
+            transition={{ duration: 0.15 }}
+          >
             {children}
           </LayoutTransition>
         </div>
       </main>
-      <City className='md:show hidden flex-6 md:flex xl:flex-7 2xl:flex-3'>
+      <CityIllustration className='md:show hidden flex-6 md:flex xl:flex-7 2xl:flex-3'>
         <Logo className='m-auto w-3/4 brightness-0 invert' />
-      </City>
+      </CityIllustration>
     </div>
   );
 };

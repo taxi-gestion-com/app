@@ -1,9 +1,9 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { appPageTitle } from './app-page-title.util';
 
 describe('app page title', () => {
   beforeEach(() => {
-    process.env['NEXT_PUBLIC_APP_NAME'] = 'App';
+    process.env.NEXT_PUBLIC_APP_NAME = 'App';
   });
 
   it('renders app title only', () => {

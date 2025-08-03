@@ -1,7 +1,7 @@
-import { minLength, Struct, String } from 'effect/Schema';
+import { minLength, String as Str, Struct } from 'effect/Schema';
 
 export const forgotPasswordValidation = Struct({
-  username: String.pipe(minLength(1, { message: () => 'Saisissez votre adresse électronique ou numéro de téléphone portable' }))
+  username: Str.pipe(minLength(1, { message: () => 'Saisissez votre adresse électronique' }))
 });
 
 export type ForgotPasswordValidation = typeof forgotPasswordValidation.Type;

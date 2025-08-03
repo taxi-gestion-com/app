@@ -1,7 +1,7 @@
-import { lazy, type ReactNode } from 'react';
 import { createFormHook } from '@tanstack/react-form';
-import { type ComboBoxProps } from './fields/combobox.field';
-import { type SelectedItemProps } from './fields/selected-items.field';
+import { lazy, type ReactNode } from 'react';
+import type { ComboBoxProps } from './fields/combobox.field';
+import type { SelectedItemProps } from './fields/selected-items.field';
 import { fieldContext, formContext } from './form-context';
 
 const Input = lazy(() => import('./fields/input.field').then((module) => ({ default: module.Input })));
