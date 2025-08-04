@@ -1,6 +1,6 @@
 import { Either, ParseResult, Schema } from 'effect';
-import { Left, Right } from 'effect/Either';
-import { type ArrayFormatterIssue, ParseError } from 'effect/ParseResult';
+import type { Left, Right } from 'effect/Either';
+import type { ArrayFormatterIssue, ParseError } from 'effect/ParseResult';
 
 type StandardErrors = Record<string, { message: ArrayFormatterIssue['message']; type: ArrayFormatterIssue['_tag'] }[]>;
 

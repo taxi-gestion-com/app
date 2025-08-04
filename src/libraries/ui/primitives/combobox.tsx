@@ -1,5 +1,5 @@
+import { type UseComboboxReturnValue, useCombobox } from 'downshift';
 import { type Dispatch, type ReactNode, type SetStateAction, useState } from 'react';
-import { useCombobox, type UseComboboxReturnValue } from 'downshift';
 
 export type ComboBoxData<TItem, TPayload> = {
   itemToString: (item: TItem | null) => string;

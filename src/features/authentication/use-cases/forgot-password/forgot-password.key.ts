@@ -1,4 +1,6 @@
 import { key } from '@/libraries/piqure';
-import { ForgotPasswordValidation } from './forgot-password.validation';
+import type { ServerActionResult } from '@/libraries/server-action';
+import type { ForgotPasswordValidation } from './forgot-password.validation';
 
-export const FORGOT_PASSWORD_KEY = key<(formData: ForgotPasswordValidation) => Promise<void>>('Authentication.ForgotPassword');
+export const FORGOT_PASSWORD_KEY =
+  key<(formData: ForgotPasswordValidation) => Promise<ServerActionResult>>('Authentication.ForgotPassword');

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export const Logo = ({ color, className }: { color?: string; className?: string }): ReactNode => (
   <div className={className}>
@@ -7,7 +7,9 @@ export const Logo = ({ color, className }: { color?: string; className?: string 
       height='100%'
       viewBox='0 0 215 33'
       xmlnsXlink='http://www.w3.org/1999/xlink'
-      xmlns='http://www.w3.org/2000/svg'>
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <title>Application logo</title>
       <defs>
         <linearGradient
           id='logo'
@@ -16,7 +18,8 @@ export const Logo = ({ color, className }: { color?: string; className?: string 
           x1='9.733'
           y1='58.701'
           x2='220.506'
-          y2='58.701'>
+          y2='58.701'
+        >
           <stop style={{ stopColor: 'var(--color-primary)' }} offset='0' />
           <stop style={{ stopColor: 'var(--color-primary-subtle)' }} offset='1' />
         </linearGradient>
@@ -27,7 +30,8 @@ export const Logo = ({ color, className }: { color?: string; className?: string 
           y1='33.7'
           x2='287.473'
           y2='33.28'
-          gradientTransform='translate(-118.02,-23.783)'>
+          gradientTransform='translate(-118.02,-23.783)'
+        >
           <stop style={{ stopColor: 'var(--color-primary)' }} offset='0' />
           <stop style={{ stopColor: 'var(--color-primary-subtle)' }} offset='1' />
         </linearGradient>

@@ -19,13 +19,11 @@ const Input = ({ className, type, color, kind, scale, left, right, ...props }: I
   left == null && right == null ? (
     <input type={type} className={cn('input bg-input', color, kind, scale, className)} {...props} />
   ) : (
-    <>
-      <span className={cn('input bg-input', color, kind, scale, className)} tabIndex={-1}>
-        {left}
-        <input type={type} {...props} />
-        {right}
-      </span>
-    </>
+    <span className={cn('input bg-input', color, kind, scale, className)} tabIndex={-1}>
+      {left}
+      <input type={type} {...props} />
+      {right}
+    </span>
   );
 
 export { Input };

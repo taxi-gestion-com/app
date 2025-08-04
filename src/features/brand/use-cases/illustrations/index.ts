@@ -1,2 +1,2 @@
+export * from './city-illustration';
 export * from './logo';
-export * from './city';

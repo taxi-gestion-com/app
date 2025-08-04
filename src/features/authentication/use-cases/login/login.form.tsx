@@ -1,20 +1,26 @@
 'use client';
 
-import { RiEyeLine, RiEyeOffLine, RiMailLine, RiLockLine } from 'react-icons/ri';
-import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/form';
+import type { ReactNode } from 'react';
+import { RiEyeLine, RiEyeOffLine, RiLockLine, RiMailLine } from 'react-icons/ri';
+import { applyEffectSchema, handleAction, handleSubmit, useAppForm } from '@/libraries/form';
+import { inject } from '@/libraries/piqure';
+import { useServerAction } from '@/libraries/server-action';
 import { Button } from '@/libraries/ui/primitives/button';
 import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
-import { inject } from '@/libraries/piqure';
+import type { LoosePartial } from '@/libraries/utils';
 import { LOGIN_KEY } from './login.key';
-import { loginValidation } from './login.validation';
+import { type LoginValidation, loginValidation } from './login.validation';
 
-export const LoginForm = ({ username }: { username: string }) => {
-  const [action, isPending] = useAction(inject(LOGIN_KEY));
+type LoginFormProps = LoosePartial<Pick<LoginValidation, 'username' | 'redirect'>>;
+
+export const LoginForm = ({ username = '', redirect }: LoginFormProps): ReactNode => {
+  const [action, isPending] = useServerAction(inject(LOGIN_KEY));
 
   const form = useAppForm({
     defaultValues: {
       username,
-      password: ''
+      password: '',
+      redirect
     },
     validators: {
       onChange: applyEffectSchema(loginValidation)
@@ -25,10 +31,17 @@ export const LoginForm = ({ username }: { username: string }) => {
   return (
     <form.AppForm>
       <form onSubmit={handleSubmit(form)}>
+        <form.AppField name='redirect'>
+          {(field) => (
+            <field.Group>
+              <field.Input isPending={isPending} hidden />
+            </field.Group>
+          )}
+        </form.AppField>
         <form.AppField name='username'>
           {(field) => (
             <field.Group>
-              <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
+              <field.Label>Adresse électronique</field.Label>
               <field.Input isPending={isPending} scale='input-lg' left={<RiMailLine className='opacity-40' />} />
               <field.Info />
             </field.Group>

@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+/** biome-ignore-all lint/correctness/noUnknownProperty:  Biome does not support custom properties in CSS */
+
+@import "tailwindcss";
 
 @plugin 'tailwindcss-animate';
 
@@ -8,7 +10,7 @@
   themes:
     light --default,
     dark --prefersdark;
-  root: ':root';
+  root: ":root";
   logs: false;
 }
 
@@ -18,10 +20,11 @@
   --color-base-500: oklch(0.8 0 90);
   --color-primary-subtle: oklch(0.6 0.19 260);
   --color-input: oklch(0.99 0.01 260);
+  --color-navbar: oklch(1 0 90);
 }
 
 @plugin "daisyui/theme" {
-  name: 'light';
+  name: "light";
   default: true;
 
   --color-base-100: oklch(1 0 90);
@@ -33,11 +36,12 @@
   --color-primary: oklch(0.5 0.2 260);
   --color-primary-subtle: oklch(0.6 0.19 260);
   --color-muted: oklch(0.5 0 17);
-  --color-input: oklch(0.99 0 260);
+  --color-input: oklch(0.99 0.01 260);
+  --color-navbar: oklch(1 0 90);
 }
 
 @plugin "daisyui/theme" {
-  name: 'dark';
+  name: "dark";
   default: true;
 
   --color-base-100: oklch(0.2 0 0);
@@ -50,4 +54,5 @@
   --color-primary-subtle: oklch(0.54 0.2 280);
   --color-muted: oklch(0.7 0 90);
   --color-input: oklch(0.17 0 0);
+  --color-navbar: oklch(0.23 0 0);
 }

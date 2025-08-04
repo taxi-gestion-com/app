@@ -1,15 +1,16 @@
-import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import type { ReactNode } from 'react';
 import { RiGithubFill, RiTwitterXFill } from 'react-icons/ri';
 import '@/styles/globals.css';
-import { appPageTitle } from '@/features/web';
 import { Logo } from '@/features/brand';
-import { type Category, type FooterLink, Footer, FooterLegal, FooterSocialLinks } from '@/libraries/ui/blocks/footer';
-import { ThemeProvider } from '@/libraries/ui/theme/providers';
-import { ThemeChanger } from '@/libraries/ui/primitives/theme-changer';
-import { ReactQueryProvider } from '@/libraries/react-query';
+import { appPageTitle } from '@/features/web';
 import { PipeProviders } from '@/libraries/providers';
+import { ReactQueryProvider } from '@/libraries/react-query';
+import { type Category, Footer, FooterLegal, type FooterLink, FooterSocialLinks } from '@/libraries/ui/blocks/footer';
+import { Toaster } from '@/libraries/ui/blocks/toaster';
+import { ThemeChanger } from '@/libraries/ui/primitives/theme-changer';
+import { ThemeProvider } from '@/libraries/ui/theme/providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -74,6 +75,7 @@ const RootLayout = ({
   <html lang='en' suppressHydrationWarning data-theme='light'>
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <PipeProviders providers={[withReactQuery, withTheme]}>
+        <Toaster kind='alert-soft' directionY='toast-top' />
         {children}
         <div className='border-base-300 text-muted border-t border-solid'>
           <Footer className='bg-base-200' categories={footerCategories}>
@@ -84,7 +86,8 @@ const RootLayout = ({
             className='bg-base-300'
             company='Red Green Refactor'
             privacyPolicyLink='/privacy'
-            termsOfServiceLink='/terms'>
+            termsOfServiceLink='/terms'
+          >
             <FooterSocialLinks links={socialLinks}></FooterSocialLinks>
           </FooterLegal>
         </div>

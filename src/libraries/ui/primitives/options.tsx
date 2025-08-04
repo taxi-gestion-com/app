@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { cn } from '@/libraries/utils';
 
 export type OptionsData<T> = {
@@ -41,7 +41,8 @@ export const Options = <T,>({
     className={cn(
       'menu bg-input rounded-field border-base-200 absolute z-10 mt-1.5 w-72 flex-nowrap border shadow-lg',
       !(isOpen && (items.length || showEmpty)) && 'hidden'
-    )}>
+    )}
+  >
     <ul className='max-h-50 overflow-scroll' {...getMenuProps?.()}>
       {isOpen &&
         items.map(
@@ -49,7 +50,8 @@ export const Options = <T,>({
             <li
               {...getItemProps?.({ item, index })}
               key={itemToKey(item)}
-              className={cn(item === highlightedItem && 'bg-base-200', item === selectedItem && 'font-bold')}>
+              className={cn(item === highlightedItem && 'bg-base-200', item === selectedItem && 'font-bold')}
+            >
               {renderItem({ item, index, isHighlighted: item === highlightedItem, isSelected: item === selectedItem })}
             </li>
           )

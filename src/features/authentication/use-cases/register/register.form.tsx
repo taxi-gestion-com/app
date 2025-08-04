@@ -1,16 +1,20 @@
 'use client';
 
 import { RiEyeLine, RiEyeOffLine, RiLockLine, RiMailLine } from 'react-icons/ri';
-import { applyEffectSchema, handleAction, handleSubmit, useAction, useAppForm } from '@/libraries/form';
-import { Button } from '@/libraries/ui/primitives/button';
-import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
-import { Link } from '@/libraries/ui/primitives/link';
+import { applyEffectSchema, handleAction, handleSubmit, useAppForm } from '@/libraries/form';
 import { inject } from '@/libraries/piqure';
+import { toastError } from '@/libraries/server-action/components';
+import { useServerAction } from '@/libraries/server-action/use-server-action';
+import { Button } from '@/libraries/ui/primitives/button';
+import { Link } from '@/libraries/ui/primitives/link';
+import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
 import { REGISTER_KEY } from './register.key';
 import { registerValidation } from './register.validation';
 
 export const RegisterForm = ({ username }: { username: string }) => {
-  const [action, isPending] = useAction(inject(REGISTER_KEY));
+  const [action, isPending] = useServerAction(inject(REGISTER_KEY), {
+    onError: toastError
+  });
 
   const form = useAppForm({
     defaultValues: {
@@ -30,7 +34,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
         <form.AppField name='username'>
           {(field) => (
             <field.Group>
-              <field.Label>Adresse électronique ou numéro de téléphone portable</field.Label>
+              <field.Label>Adresse électronique</field.Label>
               <field.Input isPending={isPending} scale='input-lg' left={<RiMailLine className='opacity-40' />} />
               <field.Info />
             </field.Group>
