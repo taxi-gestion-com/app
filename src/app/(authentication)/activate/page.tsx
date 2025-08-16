@@ -6,10 +6,12 @@ import { guestOrRedirect } from '@/libraries/better-auth';
 import { ClientProvider } from '@/libraries/piqure';
 
 export const metadata: Metadata = {
-  title: appPageTitle('Activez votre compte')
+  title: appPageTitle()('Activez votre compte')
 };
 
-const Page = async ({ searchParams }: { searchParams: Promise<{ email?: string; token?: string }> }): Promise<ReactNode> => {
+type SearchParams = { email?: string; token?: string };
+
+const Page = async ({ searchParams }: { searchParams: Promise<SearchParams> }): Promise<ReactNode> => {
   await guestOrRedirect();
 
   const { email, token } = await searchParams;

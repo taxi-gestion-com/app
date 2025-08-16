@@ -1,6 +1,10 @@
+import type { LoosePartial } from '@/libraries/utils';
 import { RegisterForm } from './register.form';
+import type { RegisterValidation } from './register.validation';
 
-export const RegisterPage = async ({ username }: { username: string }) => (
+type RegisterPageProps = LoosePartial<Pick<RegisterValidation, 'username'>>;
+
+export const RegisterPage = async ({ username }: RegisterPageProps) => (
   <>
     <h1 className='text-primary mb-6 text-4xl font-semibold'>Créez votre compte</h1>
     <p className='text-muted mb-12'>

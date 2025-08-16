@@ -5,16 +5,19 @@ import { RiEyeLine, RiEyeOffLine, RiLockLine, RiMailLine } from 'react-icons/ri'
 import { applyEffectSchema, handleAction, handleSubmit, useAppForm } from '@/libraries/form';
 import { inject } from '@/libraries/piqure';
 import { useServerAction } from '@/libraries/server-action';
+import { toastError } from '@/libraries/server-action/components';
 import { Button } from '@/libraries/ui/primitives/button';
 import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
 import type { LoosePartial } from '@/libraries/utils';
-import { LOGIN_KEY } from './login.key';
-import { type LoginValidation, loginValidation } from './login.validation';
+import { type SignInValidation, signInValidation } from '../sign-in.validation';
+import { SIGN_IN_KEY } from './sign-in.key';
 
-type LoginFormProps = LoosePartial<Pick<LoginValidation, 'username' | 'redirect'>>;
+type SignInFormProps = LoosePartial<Pick<SignInValidation, 'username' | 'redirect'>>;
 
-export const LoginForm = ({ username = '', redirect }: LoginFormProps): ReactNode => {
-  const [action, isPending] = useServerAction(inject(LOGIN_KEY));
+export const SignInForm = ({ username = '', redirect }: SignInFormProps): ReactNode => {
+  const [action, isPending] = useServerAction(inject(SIGN_IN_KEY), {
+    onError: toastError
+  });
 
   const form = useAppForm({
     defaultValues: {
@@ -23,7 +26,7 @@ export const LoginForm = ({ username = '', redirect }: LoginFormProps): ReactNod
       redirect
     },
     validators: {
-      onChange: applyEffectSchema(loginValidation)
+      onChange: applyEffectSchema(signInValidation)
     },
     onSubmit: handleAction(action)
   });

@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react';
+import type { LoosePartial } from '@/libraries/utils';
 import { ActivateForm } from './activate.form';
+import type { ActivateValidation } from './activate.validation';
 
-type ActivatePageProps = {
-  email: string | undefined;
-  token: string | undefined;
-};
+type ActivatePageProps = LoosePartial<ActivateValidation> & { email: string | undefined };
 
 export const ActivatePage = async ({ email, token }: ActivatePageProps): Promise<ReactNode> => (
   <>

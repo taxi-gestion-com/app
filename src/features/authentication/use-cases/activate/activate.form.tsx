@@ -4,14 +4,16 @@ import type { ReactNode } from 'react';
 import { applyEffectSchema, handleAction, handleSubmit, useAppForm } from '@/libraries/form';
 import { inject } from '@/libraries/piqure';
 import { useServerAction } from '@/libraries/server-action';
-import { toastError, toastSuccess } from '@/libraries/server-action/components';
+import { toastError } from '@/libraries/server-action/components';
 import { Link } from '@/libraries/ui/primitives/link';
+import type { LoosePartial } from '@/libraries/utils';
 import { ACTIVATE_KEY } from './activate.key';
-import { activateValidation } from './activate.validation';
+import { type ActivateValidation, activateValidation } from './activate.validation';
 
-export const ActivateForm = ({ token }: { token: string }): ReactNode => {
+type ActivateFormProps = LoosePartial<ActivateValidation>;
+
+export const ActivateForm = ({ token = '' }: ActivateFormProps): ReactNode => {
   const [action, isPending, state] = useServerAction(inject(ACTIVATE_KEY), {
-    onSuccess: toastSuccess(() => 'Votre compte a été activé avec succès.'),
     onError: toastError
   });
 
@@ -40,7 +42,7 @@ export const ActivateForm = ({ token }: { token: string }): ReactNode => {
             <br />
           </p>
           <p className='text-center'>
-            Recommencez la <Link href='/register'>création de votre compte</Link> pour en générer un nouveau&nbsp;!
+            Recommencez la <Link href='/register'>création de votre compte</Link> pour en obtenir un nouveau&nbsp;!
           </p>
         </>
       )}

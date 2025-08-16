@@ -1,7 +1,11 @@
 import type { ReactNode } from 'react';
+import type { LoosePartial } from '@/libraries/utils';
 import { ForgotPasswordForm } from './forgot-password.form';
+import type { ForgotPasswordValidation } from './forgot-password.validation';
 
-export const ForgotPasswordPage = async ({ username }: { username: string }): Promise<ReactNode> => (
+type ForgotPasswordPageProps = LoosePartial<ForgotPasswordValidation>;
+
+export const ForgotPasswordPage = async ({ username }: ForgotPasswordPageProps): Promise<ReactNode> => (
   <>
     <h1 className='text-primary mb-6 text-4xl font-semibold'>Mot de passe oublié</h1>
     <p className='text-muted mb-12'>

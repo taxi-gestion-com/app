@@ -12,7 +12,7 @@ const Layout = ({
   children: ReactNode;
 }>): ReactNode => {
   const pathname: string | null = useSelectedLayoutSegment();
-  const isLeftSlideDirection: boolean = ['login', 'activate'].includes(pathname ?? '');
+  const isLeftSlideDirection: boolean = ['sign-in', 'activate'].includes(pathname ?? '');
 
   return (
     <div className='flex h-screen'>

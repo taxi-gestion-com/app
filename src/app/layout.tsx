@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: appPageTitle()
+  title: appPageTitle()()
 };
 
 const footerCategories: Category[] = [

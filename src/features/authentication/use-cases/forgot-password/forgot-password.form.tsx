@@ -5,10 +5,13 @@ import { RiMailLine } from 'react-icons/ri';
 import { applyEffectSchema, handleAction, handleSubmit, useAppForm } from '@/libraries/form';
 import { inject } from '@/libraries/piqure';
 import { useServerAction } from '@/libraries/server-action';
+import type { LoosePartial } from '@/libraries/utils';
 import { FORGOT_PASSWORD_KEY } from './forgot-password.key';
-import { forgotPasswordValidation } from './forgot-password.validation';
+import { type ForgotPasswordValidation, forgotPasswordValidation } from './forgot-password.validation';
 
-export const ForgotPasswordForm = ({ username }: { username: string }): ReactNode => {
+type ForgotPasswordFormProps = LoosePartial<ForgotPasswordValidation>;
+
+export const ForgotPasswordForm = ({ username = '' }: ForgotPasswordFormProps): ReactNode => {
   const [action, isPending] = useServerAction(inject(FORGOT_PASSWORD_KEY));
 
   const form = useAppForm({
@@ -38,7 +41,7 @@ export const ForgotPasswordForm = ({ username }: { username: string }): ReactNod
         </form.Submit>
       </form>
       <p className='mt-12 text-center'>
-        <form.QueryLink pathname='/login' queryParam='username'>
+        <form.QueryLink pathname='/sign-in' queryParam='username'>
           Retour au formulaire de connexion
         </form.QueryLink>
       </p>

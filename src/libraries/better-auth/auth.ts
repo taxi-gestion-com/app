@@ -3,13 +3,33 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { nextCookies } from 'better-auth/next-js';
 import nodemailer from 'nodemailer';
-// todo: solve dependencies inversion issue
+import { ResetPasswordEmail } from '@/features/authentication/use-cases/forgot-password/emails/forgot-password.email';
+// todo: solve dependencies inversion issues
 import { EmailVerificationEmail } from '@/features/authentication/use-cases/register/emails/email-verification.email';
 import { db } from '@/libraries/drizzle';
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: 'pg' }),
-  emailAndPassword: { enabled: true, requireEmailVerification: true },
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: true,
+    sendResetPassword: async ({ user, token }) => {
+      const transporter = nodemailer.createTransport({
+        host: 'localhost',
+        port: 1025,
+        secure: false
+      });
+
+      await transporter.sendMail({
+        from: 'support@taxi-gestion.com',
+        to: user.name,
+        subject: 'Réinitialisation de votre mot de passe',
+        html: await render(
+          ResetPasswordEmail({ updatedDate: new Date(), baseUrl: 'http://localhost:3000', token, email: user.email })
+        )
+      });
+    }
+  },
   emailVerification: {
     sendVerificationEmail: async ({ user, token }) => {
       const transporter = nodemailer.createTransport({

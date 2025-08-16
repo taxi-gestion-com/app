@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
-import { LogoutButton } from '@/features/authentication/use-cases/logout';
-import { LOGOUT_KEY } from '@/features/authentication/use-cases/logout/logout.key';
-import { logoutMutation } from '@/features/authentication/use-cases/logout/logout.mutation';
+import { SIGN_OUT_KEY, SignOutButton, signOutMutation } from '@/features/authentication/use-cases';
 import { Logo } from '@/features/brand';
 import { ClientProvider } from '@/libraries/piqure';
 import { Link } from '@/libraries/ui/primitives/link';
@@ -15,8 +13,8 @@ const PrivateLayout = ({ children }: { children: ReactNode }): ReactNode => (
         </Link>
       </div>
       <div className='navbar-end'>
-        <ClientProvider bind={LOGOUT_KEY} to={logoutMutation}>
-          <LogoutButton scale='btn-sm'>Déconnexion</LogoutButton>
+        <ClientProvider bind={SIGN_OUT_KEY} to={signOutMutation}>
+          <SignOutButton scale='btn-sm'>Déconnexion</SignOutButton>
         </ClientProvider>
       </div>
     </div>

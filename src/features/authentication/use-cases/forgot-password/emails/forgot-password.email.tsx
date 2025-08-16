@@ -3,8 +3,10 @@ import { EmailButton, EmailLayout, EmailSignature } from '@/libraries/react-emai
 
 type ResetPasswordEmailProps = {
   username?: string;
+  email?: string;
   updatedDate: Date;
   baseUrl: string;
+  token: string;
 };
 
 const formatDate = (updatedDate: Date | undefined) =>
@@ -13,7 +15,7 @@ const formatDate = (updatedDate: Date | undefined) =>
     timeStyle: 'short'
   }).format(updatedDate);
 
-export const ResetPasswordEmail = ({ username, updatedDate, baseUrl }: ResetPasswordEmailProps) => (
+export const ResetPasswordEmail = ({ username, email, updatedDate, baseUrl, token }: ResetPasswordEmailProps) => (
   <EmailLayout baseUrl={baseUrl} preview='Vous avez demandé à réinitialiser votre mot de passe.'>
     <Text>Bonjour{username != null ? ` ${username}` : ''} 👋</Text>
     <Text>
@@ -22,8 +24,10 @@ export const ResetPasswordEmail = ({ username, updatedDate, baseUrl }: ResetPass
     <Text>Cliquez sur le lien ci-dessous pour définir un nouveau mot de passe&nbsp;:</Text>
     <Row>
       <Column className='text-center'>
-        <EmailButton href={`${baseUrl}/reset-password`}>Réinitialiser mon mot de passe</EmailButton>
-        <Text className='text-muted mb-0'>Ce lien est valable pendant 24 heures.</Text>
+        <EmailButton href={`${baseUrl}/reset-password?token=${token}&email=${email}`}>
+          Réinitialiser votre mot de passe
+        </EmailButton>
+        <Text className='text-muted mb-0'>Ce lien est valable pendant une heure.</Text>
       </Column>
     </Row>
     <Text>

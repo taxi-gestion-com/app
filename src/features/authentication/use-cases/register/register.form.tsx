@@ -8,10 +8,13 @@ import { useServerAction } from '@/libraries/server-action/use-server-action';
 import { Button } from '@/libraries/ui/primitives/button';
 import { Link } from '@/libraries/ui/primitives/link';
 import { ToggleState } from '@/libraries/ui/primitives/toggle-state';
+import type { LoosePartial } from '@/libraries/utils';
 import { REGISTER_KEY } from './register.key';
-import { registerValidation } from './register.validation';
+import { type RegisterValidation, registerValidation } from './register.validation';
 
-export const RegisterForm = ({ username }: { username: string }) => {
+type RegisterFormProps = LoosePartial<Pick<RegisterValidation, 'username'>>;
+
+export const RegisterForm = ({ username = '' }: RegisterFormProps) => {
   const [action, isPending] = useServerAction(inject(REGISTER_KEY), {
     onError: toastError
   });
@@ -83,7 +86,7 @@ export const RegisterForm = ({ username }: { username: string }) => {
       </form>
       <p className='mt-12 text-center'>
         Vous avez déjà un compte&nbsp;?&ensp;
-        <form.QueryLink pathname='/login' queryParam='username'>
+        <form.QueryLink pathname='/sign-in' queryParam='username'>
           Connectez-vous
         </form.QueryLink>
       </p>

@@ -19,7 +19,7 @@ export const HomePage = ({ isLoggedIn }: { isLoggedIn: boolean }): ReactNode => 
           </ButtonLink>
         ) : (
           <ButtonLink
-            href='/login'
+            href='/sign-in'
             scale='btn-lg'
             kind='btn-outline'
             className='hover:bg-base-content hover:text-neutral hover:border-base-content shadow-base-content hover:shadow'
