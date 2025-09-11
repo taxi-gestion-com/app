@@ -1,11 +1,11 @@
-import { type ReactNode } from 'react';
-import { type Feature, type FeatureCollection, type Point } from 'geojson';
 import { pipe } from 'effect';
 import { type Effect, flatMap, map, runPromise, runSync, sleep, tap, tryPromise } from 'effect/Effect';
 import { get, set, unsafeMake } from 'effect/Ref';
-import { type OptionsData } from '@/libraries/ui/primitives/options';
-import { type ComboBoxData } from '@/libraries/form/fields';
-import { type SelectedItemsData } from '@/libraries/ui/primitives/selected-items';
+import type { Feature, FeatureCollection, Point } from 'geojson';
+import type { ReactNode } from 'react';
+import type { ComboBoxData } from '@/libraries/form/fields';
+import type { OptionsData } from '@/libraries/ui/primitives/options';
+import type { SelectedItemsData } from '@/libraries/ui/primitives/selected-items';
 
 type Address = {
   id: string;

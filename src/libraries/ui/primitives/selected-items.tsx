@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
-import { Button } from '@/libraries/ui/primitives/button';
 import { Badge } from '@/libraries/ui/primitives/badge';
+import { Button } from '@/libraries/ui/primitives/button';
 
 export type SelectedItemsData<T> = {
   itemToKey: (value: T) => string;

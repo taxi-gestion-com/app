@@ -1,4 +1,4 @@
-import { AnyFormApi } from '@tanstack/react-form';
+import type { AnyFormApi } from '@tanstack/react-form';
 import { handleSubmit } from './handle-submit';
 
 export const formProps =

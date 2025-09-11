@@ -1,9 +1,9 @@
 'use client';
 
-import { ComponentProps, ReactNode, useContext, useEffect, useRef } from 'react';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { AnimatePresence, type MotionStyle, motion } from 'framer-motion';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { AnimatePresence, motion, MotionStyle } from 'framer-motion';
+import { useSelectedLayoutSegment } from 'next/navigation';
+import { type ComponentProps, type ReactNode, useContext, useEffect, useRef } from 'react';
 
 const usePreviousValue = <T,>(value: T): T | undefined => {
   const prevValue = useRef<T | undefined>(undefined);
@@ -25,7 +25,7 @@ const FrozenRouter = (props: { children: ReactNode }): ReactNode => {
   const segment = useSelectedLayoutSegment();
   const prevSegment = usePreviousValue(segment);
 
-  const changed = segment != prevSegment && segment != undefined && prevSegment != undefined;
+  const changed = segment !== prevSegment && segment != null && prevSegment != null;
 
   return <LayoutRouterContext.Provider value={changed ? prevContext : context}>{props.children}</LayoutRouterContext.Provider>;
 };
@@ -60,7 +60,8 @@ export const LayoutTransition = ({
         initial={initial}
         animate={animate}
         exit={exit}
-        transition={transition}>
+        transition={transition}
+      >
         <FrozenRouter>{children}</FrozenRouter>
       </motion.div>
     </AnimatePresence>

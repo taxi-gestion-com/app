@@ -1,7 +1,7 @@
 import { Checkbox as CheckboxBase, type CheckboxProps as CheckboxBaseProps } from '@/libraries/ui/primitives/checkbox';
 import { useFieldContext } from '../form-context';
-import { Label } from './label.field';
 import { hasError } from './has-error';
+import { Label } from './label.field';
 
 type CheckboxProps = Omit<CheckboxBaseProps, 'name' | 'type'> & {
   isPending: boolean;

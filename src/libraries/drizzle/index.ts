@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { DATABASE_URL } from '@/settings';
-import { authenticationSchema } from '@/features/authentication';
+import { env } from '@/env';
+import { authenticationSchema } from '@/libraries/better-auth/db';
 
 export const db = drizzle({
-  connection: DATABASE_URL,
+  connection: env.DATABASE_URL,
   schema: { ...authenticationSchema },
   casing: 'snake_case'
 });

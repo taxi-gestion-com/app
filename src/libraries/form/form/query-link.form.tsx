@@ -1,5 +1,5 @@
-import { type ReactFormExtendedApi } from '@tanstack/react-form';
-import { Link, LinkProps } from '@/libraries/ui/primitives/link';
+import type { ReactFormExtendedApi } from '@tanstack/react-form';
+import { Link, type LinkProps } from '@/libraries/ui/primitives/link';
 import { useFormContext } from '../form-context';
 
 export const QueryLink = ({

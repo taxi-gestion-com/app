@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { minLength, Struct, String } from 'effect/Schema';
+import { minLength, String as Str, Struct } from 'effect/Schema';
+import { describe, expect, it } from 'vitest';
 import { applyEffectSchema } from './apply-effect-schema';
 
 const DEFAULT_ADDRESS = {
@@ -14,15 +14,15 @@ const DEFAULT_ADDRESS = {
 };
 
 const userValidation = Struct({
-  firstname: String.pipe(minLength(1, { message: () => 'Please enter your first name' })),
-  lastname: String.pipe(minLength(1, { message: () => 'Please enter your last name' })),
+  firstname: Str.pipe(minLength(1, { message: () => 'Please enter your first name' })),
+  lastname: Str.pipe(minLength(1, { message: () => 'Please enter your last name' })),
   address: Struct({
-    banId: String.pipe(minLength(1, { message: () => 'Please select an address from the suggestions' })),
-    city: String,
-    citycode: String,
-    housenumber: String,
-    postcode: String,
-    street: String
+    banId: Str.pipe(minLength(1, { message: () => 'Please select an address from the suggestions' })),
+    city: Str,
+    citycode: Str,
+    housenumber: Str,
+    postcode: Str,
+    street: Str
   })
 });
 

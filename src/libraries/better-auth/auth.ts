@@ -1,0 +1,54 @@
+import { render } from '@react-email/components';
+import { betterAuth } from 'better-auth';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { nextCookies } from 'better-auth/next-js';
+import nodemailer from 'nodemailer';
+import { ResetPasswordEmail } from '@/features/authentication/use-cases/forgot-password/emails/forgot-password.email';
+// todo: solve dependencies inversion issues
+import { EmailVerificationEmail } from '@/features/authentication/use-cases/register/emails/email-verification.email';
+import { db } from '@/libraries/drizzle';
+
+export const auth = betterAuth({
+  database: drizzleAdapter(db, { provider: 'pg' }),
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: true,
+    sendResetPassword: async ({ user, token }) => {
+      const transporter = nodemailer.createTransport({
+        host: 'localhost',
+        port: 1025,
+        secure: false
+      });
+
+      await transporter.sendMail({
+        from: 'support@taxi-gestion.com',
+        to: user.name,
+        subject: 'Réinitialisation de votre mot de passe',
+        html: await render(
+          ResetPasswordEmail({ updatedDate: new Date(), baseUrl: 'http://localhost:3000', token, email: user.email })
+        )
+      });
+    }
+  },
+  emailVerification: {
+    sendVerificationEmail: async ({ user, token }) => {
+      const transporter = nodemailer.createTransport({
+        host: 'localhost',
+        port: 1025,
+        secure: false
+      });
+
+      await transporter.sendMail({
+        from: 'support@taxi-gestion.com',
+        to: user.name,
+        subject: 'Activez votre compte Taxi Gestion',
+        html: await render(EmailVerificationEmail({ baseUrl: 'http://localhost:3000', token }))
+      });
+    },
+    autoSignInAfterVerification: true
+  },
+  plugins: [nextCookies()],
+  advanced: {
+    useSecureCookies: true
+  }
+});

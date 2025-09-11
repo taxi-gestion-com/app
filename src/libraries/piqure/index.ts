@@ -1,2 +1,2 @@
-export * from './container';
 export * from './client.provider';
+export * from './container';
